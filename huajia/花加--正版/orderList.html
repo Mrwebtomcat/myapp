@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="email=no" />
+		<meta name="format-detection" content="address=no" />
+		<meta name="format-detection" content="date=no" />
+	    <title>订单列表</title>
+	   	<link rel="stylesheet" type="text/css" href="css/Allcss.css"/> 
+	   	<link rel="stylesheet" type="text/css" href="css/orderList.css"/> 
+	    <script type="text/javascript"src="js/common.js"></script>
+	   	<script type="text/javascript" src="js/jquery.min.js"></script>
+	   	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+	</head>
+	<body>
+		<div id="uesrorder"></div>
+		
+		<script type="text/html" id="orderli" >
+			<!-- 一行 -->
+				<div class="orderWrap"data-Id="[orderId]" data-ExpressOrderNo="[ExpressOrderNo]" data-State="[State-ID]"data-Express="[Express]" data-produsId="[produsId]"  onclick="orderclicks($(this),event)">
+				<p>
+					<span>订单编号：</span>
+					<span class="orderId">[OrderNo]</span>
+					<span class="paymentStatus">[State]</span>
+				</p>
+				<div class="commodity">
+					<img src="[orderImg]" alt="" />
+					<span>
+						<p>[ProductName]</p>
+						<p>[DeliveryMode]</p>
+					</span>
+					<span>X 1</span>
+				</div>
+				<p>
+					<div class="twochick " href="javascript:;" onclick="chaks2($(this),event)">[chak2]</div>	
+					<div class="firstchick " href="javascript:;" onclick="chaks1($(this),event)">[chak1]</div>
+					
+				</p>
+				<p class="clearfox"></p>
+			</div>
+		</script>
+		
+		
+	<script type="text/javascript">
+			
+			
+		</script>
+		
+		<script type="text/javascript">
+		$(function(){
+			
+			var token=$.cookie("token");
+			var skip=0,take=100;
+			
+			var State=GetQueryString("State");
+			var orderli=document.getElementById("orderli").innerHTML;
+			var orderlis=[];
+			var orderstate="";
+			var chak1="",chak2="";
+			if(State=="No1"){
+					$.ajax({
+						type:"get",
+						url:server+'/api/Order/GetPendingPay?token='+token+'&skip='+skip+'&take='+take,
+						dataType:"json",
+						success:function(data){
+							for(i=0;i<data.Result.rows;i++){
+								
+								orderlis[i]=orderli.replace(reg,function(node,key){
+									return{
+										"Express":"",
+										"State-ID":data.Result.data[i].State,
+										"ExpressOrderNo":"0",
+										"orderId":data.Result.data[i].Id,
+										"OrderNo":data.Result.data[i].OrderNo,
+										"orderImg":"/pic/"+data.Result.data[i].ProductImg.split(";")[0],
+										"State":"未付款",
+										"chak1":"去付款",
+										"chak2":"删除",
+										"produsId":data.Result.data[i].tb_ProdtctId,
+										"ProductName":data.Result.data[i].ProductName,
+										"DeliveryMode":data.Result.data[i].DeliveryMode
+										}[key]
+								})
+						
+						$("#uesrorder").append(orderlis[i]);
+						
+							}
+							
+							
+						}
+					});
+				}
+			
+			
+			
+			if(State=="Yes2"){
+				
+					$.ajax({
+						type:"get",
+						url:server+'/api/Order/GetPendingDeliver?token='+token+'&skip='+skip+'&take='+take,
+						dataType:"json",
+						success:function(data){
+							for(i=0;i<data.Result.rows;i++){
+								orderlis[i]=orderli.replace(reg,function(node,key){
+									return{
+										"Express":"",
+										"State-ID":data.Result.data[i].State,
+										"ExpressOrderNo":"0",
+										"orderId":data.Result.data[i].Id,
+										"OrderNo":data.Result.data[i].OrderNo,
+										"orderImg":"/pic/"+data.Result.data[i].ProductImg.split(";")[0],
+										"State":"已付款",
+										"chak1":"转赠",
+										"chak2":"改单",
+										"produsId":data.Result.data[i].tb_ProdtctId,
+										"ProductName":data.Result.data[i].ProductName,
+										"DeliveryMode":data.Result.data[i].DeliveryMode
+										}[key]
+								})
+						
+						$("#uesrorder").append(orderlis[i]);
+						
+							}
+						}
+						
+					});
+					
+					
+				}	
+				
+				
+				if(State=="chack3"){
+					$.ajax({
+						type:"get",
+						url:server+'/api/Order/GetPendingReceipt?token='+token+'&skip='+skip+'&take='+take,
+						dataType:"json",
+						success:function(data){
+							for(i=0;i<data.Result.rows;i++){
+								orderlis[i]=orderli.replace(reg,function(node,key){
+									return{
+										"Express":encodeURI(data.Result.data[i].Express),
+										"State-ID":data.Result.data[i].State,
+										"ExpressOrderNo":data.Result.data[i].ExpressOrderNo,
+										"orderId":data.Result.data[i].Id,
+										"OrderNo":data.Result.data[i].OrderNo,
+										"orderImg":"/pic/"+data.Result.data[i].ProductImg.split(";")[0],
+										"State":"已送货",
+										"chak1":"查物流",
+										"chak2":"确认订单",
+										"produsId":data.Result.data[i].tb_ProdtctId,
+										"ProductName":data.Result.data[i].ProductName,
+										"DeliveryMode":data.Result.data[i].DeliveryMode
+										}[key]
+								})
+						
+						$("#uesrorder").append(orderlis[i])
+					
+							}
+							
+						}
+					});
+					}
+				
+				
+				
+				if(State=="OK4"){
+					$.ajax({
+						type:"get",
+						url:server+'/api/Order/GetPendingComplete?token='+token+'&skip='+skip+'&take='+take,
+						dataType:"json",
+						success:function(data){
+							for(i=0;i<data.Result.rows;i++){
+								orderlis[i]=orderli.replace(reg,function(node,key){
+									return{
+										"Express":"",
+										"State-ID":data.Result.data[i].State,
+										"ExpressOrderNo":"0",
+										"orderId":data.Result.data[i].Id,
+										"OrderNo":data.Result.data[i].OrderNo,
+										"orderImg":"/pic/"+data.Result.data[i].ProductImg.split(";")[0],
+										"State":"已完成",
+										"chak1":"",
+										"chak2":"删除",
+										"produsId":data.Result.data[i].tb_ProdtctId,
+										"ProductName":data.Result.data[i].ProductName,
+										"DeliveryMode":data.Result.data[i].DeliveryMode
+										}[key]
+								})
+					$("#uesrorder").append(orderlis[i])
+							}
+							//只有一个删除按钮
+					var nulla=$(".orderWrap").find("div");
+						for(i=0;i<nulla.length;i++){
+							if(nulla[i].innerText==""){
+								nulla[i].style="border:none"
+							}
+							}}
+					});
+					}
+			
+			
+			
+			if(!State){
+				//查看全部订单
+				$.ajax({
+					type:"get",
+					url:server+'/api/Order/Get?token='+token+'&skip='+skip+'&take='+take,
+					dataType:"json",
+					success:function(data){
+						var orderli=document.getElementById("orderli").innerHTML;
+						var orderlis=[];
+						var orderstate="",chak1="",chak2="";
+						for(i=0;i<data.Result.rows;i++){
+							switch(data.Result.data[i].State){
+								case "1":
+									orderstate="未付款";
+									chak1="去付款";
+									chak2="删除";
+									break;
+								case "2":
+									orderstate="已付款";
+									chak1="转赠";
+									chak2="改单";
+									break;
+								case "3":
+									orderstate="已送货";
+									chak1="查物流";
+									chak2="确认订单";
+									break;
+								case "4":
+									orderstate="已完成";
+									chak1="";
+									chak2="删除";
+									break;
+								
+								}
+							var ExpressOrderNo="";
+							if(data.Result.data[i].ExpressOrderNo==""){
+								ExpressOrderNo=0;
+							}else{
+								ExpressOrderNo=data.Result.data[i].ExpressOrderNo;
+							}
+							if(data.Result.data[i].Express==""){
+								Express="";
+							}else{
+								Express=encodeURI(data.Result.data[i].Express);
+							}
+							
+							orderlis[i]=orderli.replace(reg,function(node,key){
+								return{
+									"Express":Express,
+									"State-ID":data.Result.data[i].State,
+									"ExpressOrderNo":ExpressOrderNo,
+									"orderId":data.Result.data[i].Id,
+									"OrderNo":data.Result.data[i].OrderNo,
+									"orderImg":"/pic/"+data.Result.data[i].ProductImg.split(";")[0],
+									"State":orderstate,
+									"chak1":chak1,
+									"chak2":chak2,
+									"produsId":data.Result.data[i].tb_ProdtctId,
+									"ProductName":data.Result.data[i].ProductName,
+									"DeliveryMode":data.Result.data[i].DeliveryMode
+								}[key]
+							})
+							
+							$("#uesrorder").append(orderlis[i])
+							
+							
+						}
+						var nulla=$(".orderWrap").find("div");
+						for(i=0;i<nulla.length;i++){
+							if(nulla[i].innerText==""){
+								nulla[i].style="border:none"
+							}
+							}
+					}
+					})
+			}
+		
+		
+			
+		
+		
+		
+			
+		})
+			
+			
+		</script>
+	<script type="text/javascript">
+		
+		
+		function chaks1(obj,event){
+			event.stopPropagation(); 
+			var orderId=obj.parent("div").attr("data-id");
+			if(obj.text()=="转赠"){
+				location.href='change_msg.html?url='+'orderList.html?State=Yes2'+'&orderId='+orderId+'&chack=zhuan';
+			}
+			if(obj.text()=="去付款"){
+				var produsid=obj.parent("div").attr("data-produsid");
+				var orderId=obj.parent("div").attr("data-id");
+				var ordersondel=obj.parent("div").find("p").eq(0).find("span").eq(1).text();
+				location.href="submitOrder.html?id="+produsid+"&order="+orderId+"&orderNObs="+ordersondel;
+				
+			}
+			if(obj.text()=="查物流"){
+				
+				var expressorderno=obj.parent("div").attr("data-expressorderno");
+				var Expres=obj.parent("div").attr("data-express")
+				var ordersondel=obj.parent("div").find("p").eq(0).find("span").eq(1).text();
+					location.href="search_logistics.html?Expres="+encodeURI(Expres)+"&expressorderno="+expressorderno+"&ordersondel="+ordersondel;
+					
+				
+				
+			}
+		}
+		function chaks2(obj,event){
+			event.stopPropagation(); 
+			var orderId=obj.parent("div").attr("data-id");
+			if(obj.text()=="改单"){
+					location.href='change_msg.html?url='+'orderList.html?State=Yes2'+'&orderId='+orderId+"&chack=gai";
+			}
+			if(obj.text()=="确认收货"){
+					$.ajax({
+					type:"post",
+					url:server+"/api/Order/ConfirmReceipt?token="+token+"&ordernum="+orderId,
+					dataType:"json",
+					success:function(){
+						alert("")
+						location.reload()
+						
+					}})
+			}
+			if(obj.text()=="删除"){
+				var token=$.cookie("token");
+				
+				var ordersondel=obj.parent("div").find("p").eq(0).find("span").eq(1).text();
+					$.ajax({
+					type:"post",
+					url:server+"/api/Order/EvaluateDelete?token="+token+"&ordernum="+ordersondel,
+					dataType:"json",
+					success:function(){
+						alert("已删除");
+						location.reload()
+					}
+					})
+				
+			}
+			if(obj.text()=="确认收货"){
+				var ordersondel=obj.parent("div").find("p").eq(0).find("span").eq(1).text();
+				$.ajax({
+					type:"post",
+					url:server+"/api/Order/ConfirmReceipt?token="+token+"&ordernum="+ordersondel,
+					dataType:"json",
+					success:function(){
+						location.href="orderList.html?State=OK4"
+					}
+					})
+			}	
+		}	
+		
+		function orderclicks(obj,event){
+			event.stopPropagation(); 
+			var orderID=obj.attr("data-id");
+			location.href="orderDetails.html?orderID="+orderID
+		}
+		
+		
+	</script>	
+		
+		
+	</body>
+</html>

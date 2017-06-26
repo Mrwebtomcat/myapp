@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="email=no" />
+		<meta name="format-detection" content="address=no" />
+		<meta name="format-detection" content="date=no" />
+	    <title>订单详情</title>
+	   	<link rel="stylesheet" type="text/css" href="css/Allcss.css"/> 
+	   	<link rel="stylesheet" type="text/css" href="css/orderDetails.css"/> 
+	   	 <script type="text/javascript"src="js/common.js"></script>
+	   	<script type="text/javascript" src="js/jquery.min.js"></script>
+	   	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+	</head>
+	<body>
+		<script type="text/html"id="orderDe" >
+			
+		
+			<div id="details_top">
+				<div id="detailsOne">
+					<span>订单编号：</span>
+					<span id="orderId">[orderNOb]</span>
+					<button id="paymentStatus">[orderState]</button>
+				</div>
+				<div class="commodity">
+					<img src="[proImg]" alt="" />
+					<span>
+						<p id="orderName">[Name]</p>
+						<p id="orderDescribe">[Synopsis]</p>
+					</span>
+					<span id="orderAmount">X 1</span>
+				</div>
+				<div id="detaForm" action="">
+					<p>备注留言：</p>
+					<textarea name="dateMsg" rows="2" cols="" placeholder="帮我放张小卡片：祝早日康复"id="liuyan" ></textarea>
+				</div>
+			</div>
+			<div id="addInformation">
+				<p class="title">
+					配送信息
+				</p>
+				<div id="addData">
+					<div id="addOne">
+						<span>送货时间</span>
+						<div id="dateDiv">
+							<span id="date">[CanDelivery]</span>
+							<!--<select id="date">
+								<option value="1">每周一 </option>
+								<option value="2">每周二 </option>
+								<option value="3">每周三 </option>
+								<option value="4">每周四 </option>
+								<option value="5">每周五 </option>
+								<option value="6">每周六 </option>
+								<option value="7">每周日 </option>
+							</select>-->
+							<img src="img/arrow_right_gray.png"/>
+						</div>
+						
+					</div>
+					<p>
+						<span id="userName">
+							[DeliveryName]
+						</span>
+						<span id="uesrPhone">
+							[DeliveryPhone]
+						</span>
+					</p>
+					<p id="userAddress">
+						[DeliveryAddress]
+					</p>
+				</div>
+			</div>
+			<div id="orderInformation">
+				<p class="title">
+					订单信息
+				</p>
+				<div id="orderData">
+					<p>
+						下单时间：
+						<span id="dataTime">
+							[CreateDate]
+						</span>
+					</p>
+					<p>
+						订单金额：
+						<span id="dateMoney">
+							¥ [TotalMoney]
+						</span>
+					</p>
+					<p>
+						支付方式：
+						<span id="dataPay">
+							[Payment]
+						</span>
+					</p>
+				</div>
+			</div>
+	</script>
+		<script>
+			var orderID=GetQueryString("orderID");
+			var token=$.cookie("token")
+			$.ajax({
+						type:"get",
+						url:server+'/api/Order/GetOne/'+orderID+'?token='+token,
+						dataType:"json",
+						success:function(data){
+							
+							var state=data.Result.State;
+							var sta="";
+							if(state=="2"){
+								sta="已付款";
+							}
+							if(state=="1"){
+								sta="未付款";
+							}
+							if(state=="3"){
+								sta="已送货";
+							}
+							if(state=="4"){
+								sta="已完成";
+							}
+							
+							
+							var orderDe=document.getElementById("orderDe").innerHTML;
+							var proID=data.Result.tb_ProdtctId;
+							var imgs="[]",proName="",Synopsis=""
+							$.ajax({
+									type:"get",
+									url:server+'/api/Product/GetOne/'+proID,
+									dataType:"json",
+									success:function(datas){
+										var Img=datas.Result.Image;
+										imgs=Img.split(";")[0];
+										proName=datas.Result.Name;
+										Synopsis=datas.Result.Synopsis;
+								
+								var orderDeone=orderDe.replace(reg,function(node,key){
+								return{
+									"orderNOb":data.Result.OrderNo,
+									"orderState":sta,
+									"proImg":server+'/pic/'+imgs,
+									"Name":proName,
+									"Synopsis":Synopsis,
+									"CanDelivery":data.Result.CanDelivery,
+									"DeliveryName":data.Result.DeliveryName,
+									"DeliveryPhone":data.Result.DeliveryPhone,
+									"DeliveryAddress":data.Result.DeliveryAddress,
+									"CreateDate":data.Result.CreateDate,
+									"TotalMoney":data.Result.TotalMoney,
+									"Payment":data.Result.Payment
+									
+								}[key]
+							})
+							$("body").html(orderDeone)
+								
+								
+								
+								
+									}
+									})
+									console.log(proName)
+							
+							
+							
+							
+						}
+						
+			
+			})
+			
+			
+		</script>
+			
+		
+		
+	</body>
+</html>

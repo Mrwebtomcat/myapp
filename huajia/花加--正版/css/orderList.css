@@ -1,0 +1,146 @@
+body{
+	/*font-family: PingFangSC-Regular;*/	/*11111111111*/
+	font-size: 0.6rem;
+}
+
+.orderWrap{
+	background: white;
+	margin-top: 1%;
+}
+
+.orderWrap>p:nth-of-type(1){
+	width: 95%;
+	padding-top: 2%;
+	padding-bottom: 1%;
+	padding-left: 2.5%;
+	line-height: 1.4rem;					/*11111111111*/
+}
+
+.orderId{
+	letter-spacing: 0.01rem;
+	/*font-family: ArialMT;*/				/*11111111111*/
+}
+
+.paymentStatus{
+	float: right;
+	color: red;
+}
+
+.commodity{
+	width: 94%;
+	display: inline-flex;
+	/*font-family: PingFangSC-Light;*/		/*11111111111*/
+	background: #F6F6F6;
+	padding: 3%;
+	padding-top:0.9rem;
+	padding-bottom:0.7rem;
+}
+
+.commodity img{
+	width:20%;
+}
+
+.commodity span:nth-of-type(1){
+	width: 70%;
+}
+
+.commodity p{
+	width: 90%;
+	margin-left: 5%;
+	margin-top: 1%;
+	font-size: 0.9rem;						/*11111111111*/
+	color: #333333;
+}
+
+.commodity p:nth-of-type(2){
+	/*font-family: PingFangSC-Regular;*/	
+	font-size: 0.8rem;						/*11111111111*/
+	color: #939393;
+	line-height:1.3rem;
+}
+
+
+@media (min-width:330px) and (max-width:375px ) {
+	.commodity p:nth-of-type(2){
+			margin-top:0.52rem;
+			line-height: 1.2rem;
+		}
+		/*a:nth-of-type(1){
+			margin-left: 54%;
+		}*/
+}
+
+
+@media (min-width:375px) and (max-width:400px ) {
+	.commodity p:nth-of-type(2){
+			margin-top:0.8rem;
+			line-height: 1.5rem;
+		}
+}
+
+@media (min-width:400px) and (max-width:600px) {
+	.commodity span:nth-of-type(1) {
+    width: 68%;
+    }
+	
+	.commodity p:nth-of-type(2){
+			margin-top:1rem;
+			line-height: 1.4rem;
+		}
+}
+
+@media (min-width:750px) and (max-width:1024px) {
+		.commodity p {
+			font-size:1.2rem;
+			margin-top: 6%;
+		}
+		.commodity{
+			padding-bottom: 1.1rem;
+		}
+		.commodity p:nth-of-type(2){
+			font-size:1rem;
+			margin-top:1rem;
+			line-height: 1.4rem;
+		}
+	
+}
+
+
+
+
+
+
+
+
+
+.commodity span:nth-of-type(2){
+	display: flex;
+    justify-content:center;
+    align-items:center;   
+	font-size: 0.8rem;						/*11111111111*/
+}
+
+.orderWrap>p:nth-of-type(3){
+	background: white;
+}
+
+
+.firstchick,.twochick{
+	float: right;
+	text-decoration:none;
+	width: 18%;
+	text-align: center;
+	line-height: 1.3rem;					/*11111111111*/
+	/*font-family: PingFangSC-Regular;*/	/*11111111111*/
+	font-size: 12px;						/*11111111111*/
+	color: #666666;
+	display: inline-block;
+	border-radius: 2px;
+	border: 1px solid #999999;
+	margin: 2% 1%;
+	padding: 1% 1%;
+}
+
+.twochick:nth-of-type(1){
+	margin-left: 54%;
+}

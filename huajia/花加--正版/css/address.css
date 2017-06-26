@@ -1,0 +1,86 @@
+body{
+	/*font-family: PingFangSC-Regular;*/	/*11111111111*/
+}
+
+.addWrap{
+	width:100%;
+	height:21.7%;
+	background:  #FFFFFF;
+	margin-top:1.1%;
+}
+
+.content{
+	width: 88%;
+	/*font-family: PingFangSC-Regular;*/	/*11111111111*/
+	font-size: 0.9rem;						/*11111111111*/
+	color: #333333;
+	padding-top: 1.6%;
+	padding-bottom: 5%;
+	margin-left: 6%;
+}
+
+.content p:nth-of-type(1){
+	/*font-family: PingFangSC-Medium;*/		/*11111111111*/
+	line-height: 2rem;						/*11111111111*/
+	font-weight: 600;
+}
+
+.content .userPhone{
+	float: right;
+	letter-spacing: -0.02rem;
+}
+
+.content p:nth-of-type(2){
+	margin-top: 1.9%;
+	font-size: 12px;						/*11111111111*/
+	color: #999999;
+	margin-bottom: 2.3%;
+	padding-bottom: 2%;
+}
+
+.content p:nth-of-type(3){
+	font-weight: 600;
+	border-top: 1px solid #D3D3D3;
+	padding-top: 0.8rem;
+}
+
+.addSelect{
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	vertical-align: -20%;
+	background:url(../img/xuanzhong.png) no-repeat 50% 50%; 
+	background-size: 100% 100%;
+}
+
+.content p:nth-of-type(3) span{
+	font-size: 0.6rem;						
+	margin-left:2%;
+}
+
+.addEdit, .addDele{
+	margin-left: 2.2%;
+	float: right;
+	padding:0 1rem;						
+	font-size: 12px;						
+	text-align: center;
+	line-height: 1.2rem;
+	color: #FFFFFF;
+	font-weight: 100;
+	background: #666666;
+	border-radius: 0.2rem;					
+}
+#seveadd{
+	width: 94%;
+	margin: 2.8% 3%;
+	padding: 3% 0;
+	color: #FFFFFF;
+	font-size: 1rem;
+	border: 0;
+	border-radius: 5px;
+	background: #FF8C8C;
+	text-align: center;
+	position: fixed;
+    bottom: 0;
+}
+

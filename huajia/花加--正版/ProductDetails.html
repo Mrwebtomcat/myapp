@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="format-detection" content="email=no" />
+		<meta name="format-detection" content="address=no" />
+		<meta name="format-detection" content="date=no" />
+		<title>商品详情</title>
+		<!--<link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>-->
+		<meta name="viewport" content=" maximum-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="css/Allcss.css"/>
+		<link rel="stylesheet" type="text/css" href="css/ProductDetails.css"/>
+		<link rel="stylesheet" type="text/css" href="css/swiper-3.4.2.min.css"/>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.cookie.js"></script>
+	 	<script type="text/javascript"src="js/common.js"></script>
+	 	<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+	</head>
+	<body>
+		<!--<div id="producr-img">
+			<img src="img/pro_1_big.png"/>
+			<div class="proimgsli">
+				<ul id="producrul">
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+		</div>-->
+		<style type="text/css">
+			.swiper-pagination-bullet{
+				    width: 1rem;
+    				height: 1rem;
+			}
+		</style>
+		<div class="swiper-container"id="producr-img">
+			<div class="swiper-wrapper">
+
+			</div>
+			<div class="swiper-pagination"></div>
+			
+		</div>
+		<!--商品介绍-->
+		<div id="pro-text"></div>
+		<div id="producrimg"></div>
+		<script type="text/javascript">
+			var id=GetQueryString("id");
+			
+			var mySwiprt=new Swiper(".swiper-container",{
+				pagination:'.swiper-pagination',
+					paginationClickable:true,
+					longSwipesRatio:0.3,
+					touchRatio:1,
+					observer:true,//修改swiper自己或子元素时，自动初始化swiper
+					observeParents:true,//修改swiper的父元素时，自动初始化swiper
+					direction:'horizontal',
+					loop:true,
+					watchSlidesProgress : true,
+					pagination:'.swiper-pagination',
+					speed:100,
+					autoplay : 3000,
+					effect:"fade"
+				})
+		
+		
+		//轮播图	
+			$.ajax({
+				type:"get",
+				url:server+'/api/Product/GetOne/'+id,
+				dataType:"json",
+		 
+				success:function(data){
+					var imgs=data.Result.Image;
+					var img=imgs.split(";")
+					for(i=0;i<img.length;i++){
+						$(".swiper-wrapper").append(
+							"<div class='swiper-slide'><img src='"+server+"/pic/"+img[i].toString()+"'/></div>"
+							);
+						}
+					var proone="<h5 >"+data.Result.Name+
+								"</h5><h6 >"+data.Result.Synopsis+
+								"</h6><p ><span>￥</span>"+data.Result.Price+"</p>"
+					$('#pro-text').html(proone);
+					//售价模块
+					
+					$("#producrimg").html(data.Result.GraphicDetails);
+				
+				
+				
+				}
+				
+			
+			
+			
+			})
+			
+			
+		
+	
+		
+	</script>
+	
+		
+		
+		
+		
+		
+		<!--<script type="text/html"id="proone">
+			
+			<h5>当月热销：精品爱尔兰玫瑰一束每周送（小熊一对）</h5>
+			<h6>每周一束，每月4次，品种随机（新用户送花瓶）</h6>
+			<p>¥125</p>
+			
+		
+			
+		</script>-->
+		
+		<!--<div id="producrimg">
+				<img src="img/details.png"/>
+			</div>-->
+		
+		<div id="ul">
+			<!--<div id="munu-fix">-->
+			<!--<div  id="munu-div1"></div>-->
+			<div  id="munu-div1"><img src="img/home.png" /></div><div id="munu-span">立即购买</div>
+		</div>
+		<!--</div>-->
+		<!--
+        	作者：280374065@qq.com
+        	时间：2017-05-08
+        	描述：5-8号暂时连接js
+        -->
+        <script type="text/javascript">
+        	 $("#munu-div1").bind("click",function(){
+        	location.href="index.html"
+        	 })
+        	$("#munu-span").bind("click",function(){
+        	location.href="submitOrder.html?id="+id;
+        	 })
+        </script>
+       
+        
+	</body>
+</html>

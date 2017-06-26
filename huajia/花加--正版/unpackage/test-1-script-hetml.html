@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>script-type=html</title>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+	</head>
+	<body>
+		<div id="adds">
+			<img src="img/pro_1_big.png"/>
+		</div>
+		<script type="text/html" id="comm">
+			<li>
+				<img src="[userimg]"/>
+			</li>
+			
+		</script>
+		<script type="text/javascript">
+			$("#adds").bind("click",function(){
+				var jsk=$("#comm").html();
+				$(this).append(jsk)
+			})
+		</script>
+		
+	</body>
+</html>

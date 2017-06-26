@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>商品详情</title>
+		<link rel="stylesheet" type="text/css" href="css/xq.css"/>
+		<link rel="stylesheet" type="text/css" href="css/Allcss.css"/>
+		<link rel="stylesheet" type="text/css" href="css/swiper-3.4.2.min.css"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.cookie.js"></script>
+	 	<script type="text/javascript"src="js/common.js"></script>
+	 	<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+	
+	</head>
+	<body>
+		<div id="banner">
+			<div class="swiper-container"id="producr-img">
+				<div class="swiper-wrapper"></div>
+				<div class="swiper-pagination"></div>
+			</div>
+		</div>
+		
+		
+		<script type="text/javascript">
+			var id=GetQueryString("id");
+			
+			var mySwiprt=new Swiper(".swiper-container",{
+				pagination:'.swiper-pagination',
+					paginationClickable:true,
+					longSwipesRatio:0.3,
+					touchRatio:1,
+					observer:true,//修改swiper自己或子元素时，自动初始化swiper
+					observeParents:true,//修改swiper的父元素时，自动初始化swiper
+					direction:'horizontal',
+					loop:true,
+					watchSlidesProgress : true,
+					pagination:'.swiper-pagination',
+					speed:100,
+					autoplay : 3000,
+					effect:"fade"
+				})
+		
+		
+		//轮播图	
+			$.ajax({
+				type:"get",
+				url:server+'/api/Product/GetOne/'+id,
+				dataType:"json",
+		 
+				success:function(data){
+					var imgs=data.Result.Image;
+					var img=imgs.split(";")
+					for(i=0;i<img.length;i++){
+						$(".swiper-wrapper").append(
+							"<div class='swiper-slide'><img src='"+server+"/pic/"+img[i].toString()+"'/></div>"
+							);
+						}
+					var proone="<h5 >"+data.Result.Name+
+								"</h5><h6 >"+data.Result.Synopsis+
+								"</h6><p ><span>￥</span>"+data.Result.Price+"</p>"
+					$('#pro-text').html(proone);
+					//售价模块
+					
+					$("#producrimg").html(data.Result.GraphicDetails);
+				
+				
+				
+				}
+				
+			
+			
+			
+			})
+			
+			
+		
+	
+		
+	</script>
+	
+		
+	</body>
+</html>

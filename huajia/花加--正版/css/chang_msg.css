@@ -1,0 +1,222 @@
+body{
+	font-size: 1rem;
+	/*font-family: font-family: PingFangSC-Regular;*/			/*1111111111*/
+}
+
+*::-webkit-input-placeholder { 
+color:#BAB8B8;
+} 
+*:-moz-placeholder { 
+color:#BAB8B8; 
+} 
+*:-ms-input-placeholder { 
+/* IE10+ */ 
+color:#BAB8B8;
+} 
+
+.input-no{
+	color:#CCCCCC;
+	pointer-events: none;	
+}
+
+
+
+input{
+	border: 0;
+	width: 60%;
+	/*font-size:0.6rem;*/
+}
+input[type="text"]{
+	font-size:0.63rem;
+	vertical-align: 0.15rem;
+}
+
+.title{
+	padding: 2% 5%;
+	line-height:1.7rem;
+	font-size: 0.9rem;
+	font-weight:400;						/*11111111111*/
+	color:#333333
+}
+
+.title:before{
+	content:"";
+	clear: both;
+	display:inline-block;
+	margin-right:5px;							/*11111111111*/
+	vertical-align: middle;
+	width:0.2rem;								/*11111111111*/
+	height:1rem;								/*11111111111*/
+	background:black;
+}
+
+#userBasic{
+	background: white;
+	padding:0 5%;
+}
+
+#userBasic label{
+	width: 100%;
+	display: block;
+	padding: 2% 0;
+	font-size: 0.8rem;							/*11111111111*/
+	color: #999999;
+}
+
+#userBasic label:nth-of-type(1){
+	border-bottom: 1px solid #DEDEDE;
+}
+
+#userBasic p{
+	width: 23%;
+	padding: 2% 0;
+	display: inline-block;
+}
+
+#userBasic input{
+	width: 66%;
+	margin-left:5%;
+	padding: 2% 2%;
+	display: inline-block;
+}
+
+#userAdd{
+	background: white;
+	padding:0 5%;
+	color: #999999;
+	font-size: 0.8rem;						
+}
+
+#userAddOne{
+	padding: 3% 0;
+	border-bottom: 1px solid #DEDEDE;
+	/*border: 1px solid black;*/
+}
+
+#userAddOne p{
+	width: 23%;
+	padding: 3% 0;
+	display: inline-block;
+}
+
+#dateDiv{
+	width: 70%;
+	text-align: right;
+	padding: 0 1% 0 0;
+	display: inline-block;
+}
+.date{
+	/*width: 25%;*/
+	outline: 0;
+	color: #BAB8B8;
+	padding: 0 0%;
+	border:0;
+	background: transparent;
+	appearance:none;
+	text-align: right;
+	-moz-appearance:none; /* Firefox */
+	-webkit-appearance:none; /* Safari 和 Chrome */
+/*	background:url("../img/arrow_right_white.png")no-repeat;*/
+}
+.clickselect{
+/*	width: 40.5%;*/
+}
+.peisongimg{
+	width:3%;
+	height:46%;
+	display: inline-block;
+	/*background: url(../img/arrow_right_gray.png)no-repeat center center #FFFFFF;*/
+
+}
+.peisongimg img{
+		vertical-align: -10%;
+}
+/*#dateDiv img{
+	width: 100%;
+	height:100%;
+	vertical-align: -10%;
+	width: 0.5rem;
+}*/
+
+#userAddTwo{
+	padding: 3% 0;
+	border-bottom: 1px solid #DEDEDE;
+}
+
+#userAddTwo p,#clickEle{
+	padding: 3% 0;
+	display: inline-block;
+}
+
+#userAddTwo p{
+	width: 23%;
+}
+
+#clickEle{
+	width: 70%;
+	text-align: right;
+}
+
+#clickEle span{
+	display: inline-block;
+	margin-right:0.9rem;
+}
+
+/*#clickEle img{
+	display: inline-block;
+	vertical-align: -10%;
+	width: 0.5rem;
+}*/
+
+#userAddThree {
+	padding: 3% 0;
+}
+
+#userAddThree p,#userAddress{
+	padding: 3% 0;
+	display: inline-block;
+}
+
+#userAddThree p{
+	width: 23%;
+}
+
+#userAddress{
+	width: 92%;
+	height: 2.3rem;
+	padding-left: 3%;
+	padding-right: 3%;
+
+}
+
+#seveadd{
+	width: 94%;
+	margin: 2.8% 3%;
+	padding: 3% 0;
+	color: #FFFFFF;
+	font-size: 1rem;
+	border: 0;
+	border-radius: 5px;
+	background: #FF8C8C;
+	text-align: center;
+}
+@media (min-width:750px) and (max-width:1024px) {
+	#userBasic label{
+		font-size:1rem;
+	}
+	input[type="text"]{
+		font-size:1rem;
+	}
+	#userAdd{
+		font-size:1rem;
+	}
+	.date{
+		font-size: 1rem;
+	}
+	.peisongimg{
+		width:2%;	
+	}
+	.title{
+		font-size:1.2rem;
+	}
+}

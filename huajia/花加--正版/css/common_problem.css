@@ -1,0 +1,47 @@
+body{
+	/*font-family: PingFangSC-Regular;*/	/*11111111111*/
+}
+
+#conmonProblem{
+	background: #FFFFFF;
+}
+
+.container{
+	width: 91.6%;
+	margin-left: 4.3%;
+	vertical-align: middle;
+	padding-top: 2.3%;
+	padding-bottom: 3.5%;
+}
+
+.container:nth-of-type(n+2){
+	border-top:0.02rem solid #E5E5E5 ;		
+}
+
+.title{
+	margin-top: 2.3%;
+	line-height:1rem;
+	font-size: 0.8rem;
+	font-weight:400;						
+	color:#333333
+}
+
+.title:before{
+	content:"";
+	clear: both;
+	display:inline-block;
+	margin-right:0.5rem;						
+	vertical-align: middle;
+	width:0.2rem;							
+	height:0.9rem;							
+	background:black;
+}
+
+.content{
+	font-size: 0.75rem;						
+	margin-top: 2.6%;
+	color:#999999;
+	line-height: 1.2rem;
+	/*margin-bottom: 0.4rem;*/
+}
+

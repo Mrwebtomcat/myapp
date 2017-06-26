@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="format-detection" content="email=no" />
+		<meta name="format-detection" content="address=no" />
+		<meta name="format-detection" content="date=no" />
+		<title>查物流</title>
+	    <link rel="stylesheet" type="text/css" href="css/Allcss.css"/> 
+	    <link rel="stylesheet" type="text/css" href="css/search_logistics.css"/>
+	     <script type="text/javascript"src="js/common.js"></script>
+	   	<script type="text/javascript" src="js/jquery.min.js"></script>
+	   	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+	</head>
+	<body>
+		
+			<div id="logistics_head">
+				<div id="imgWrap">
+					<img src="img/wuliu.png" alt="" />
+				</div>
+				<ul id="msgWrap">
+					</ul>
+					
+						<div id="logistics_body">
+							<ul id="wuliuLI">
+							</ul>
+								</div>
+					
+					
+			</div>
+			
+			
+		<script type="text/html" id="wulibianhao">
+			
+				<li>
+					订单编号：
+					<span id="logisticsID">[orderNo]</span>
+				</li>
+				<li>
+					物流状态：
+					<span id="state">[ExpresS]</span>
+				</li>
+				<li>
+					物流公司：
+					<span id="company">[Expres]</span>
+				</li>
+				<li>
+					快递单号：
+					<span id="LNumber">[ExpressOrderNo]</span>
+				</li>
+			
+		</script>
+		<script type="text/html" id="wulidizhi">
+		
+				<li>
+					<div>
+						<p>
+							[wuliudizhixiangqing]
+						</p>
+						<p>[wuliushijian]</p>
+					</div>
+				</li>
+				
+		</script>
+		
+		<script>
+			var Expres=GetQueryString("Expres");
+//			var Expresp=unescape(Expres);
+			var ExpressOrderNo=GetQueryString("expressorderno");
+			var Orersondel=GetQueryString("ordersondel");
+			var zhangtai="",dizhi=[];
+			$.ajax({
+					type:"post",
+					url:server+"/api/Order/singleExpress?Express="+Expres+"&ExpressOrderNo="+ExpressOrderNo,
+					dataType:"json",
+					success:function(data){
+						var Expresjson= JSON.parse(data.Result);
+						//json数据，全部
+					var add=Expresjson.data;
+					//物流信息地址
+						var wulibianhao=document.getElementById("wulibianhao").innerHTML;
+						var wulidizhi=document.getElementById("wulidizhi").innerHTML;
+						
+						var state=Expresjson.state;
+						 switch(state){
+						 	case "0":
+						 	zhangtai="在途";
+						 	break;
+						 	case "1":
+						 	zhangtai="揽件中";
+						 	break;
+						 	case "2":
+						 	zhangtai="疑难";
+						 	break;
+						 	case "3":
+						 	zhangtai="签收";
+						 	break;
+						 	case "4":
+						 	zhangtai="退签";
+						 	break;
+						 	case "5":
+						 	zhangtai="派件";
+						 	break;
+						 	case "6":
+						 	zhangtai="退回";
+						 	break;
+						 }
+						
+						
+						var wulibianhaos=wulibianhao.replace(reg,function(node,key){
+							return{
+								"orderNo":Orersondel,
+								"ExpresS":zhangtai,
+								"Expres":decodeURI(decodeURI(encodeURI(Expres))),
+								"ExpressOrderNo":ExpressOrderNo
+							}[key]
+						})
+						
+						$("#msgWrap").html(wulibianhaos)
+						
+						
+					
+					for(i=0;i<add.length;i++){
+						
+						dizhi[i]=wulidizhi.replace(reg,function(node,key){
+							return{
+								"wuliudizhixiangqing":add[i].context,
+								"wuliushijian":add[i].ftime
+							}[key]
+						})
+						$("#wuliuLI").append(dizhi[i]);
+						
+					}
+					
+					
+					}
+					
+					
+					
+					
+					})
+				
+			
+		</script>
+		
+		
+		
+		
+		
+		
+	</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="email=no" />
+		<meta name="format-detection" content="address=no" />
+		<meta name="format-detection" content="date=no" />
+	    <title>自助改单</title>
+	   	<link rel="stylesheet" type="text/css" href="css/Allcss.css"/> 
+	   	<link rel="stylesheet" type="text/css" href="css/chang_msg.css"/> 
+	   	<script type="text/javascript" src="js/jquery.min.js"></script>
+	</head>
+	<body>
+		<form action="" id="changUser">
+			<div id="changUser_head">
+				<p class="title">
+					收货人信息
+				</p>
+				<div id="userBasic">
+					<label for="">
+						<p>姓名</p>
+						<input type="text" placeholder="请输入真实姓名"/>
+					</label>
+					<label for="">
+						<p>手机</p>
+						<input type="text" placeholder="请输入您的手机号码"/>
+					</label>
+				</div>
+			</div>
+			<div id="changUser_body">
+				<p class="title">
+					配送信息
+				</p>
+				<div id="userAdd">
+					<div id="userAddOne">
+						<p>
+							收货时间：
+						</p>
+						<div id="dateDiv">
+							&nbsp;
+							<select class="date">
+			
+								<option value="1">每周一 </option>
+								<option value="2">每周二 </option>
+								<option value="3">每周三 </option>
+								<option value="4">每周四 </option>
+								<option value="5">每周五 </option>
+								<option value="6">每周六 </option>
+								<option value="7">每周日 </option>
+							</select>
+							<div class="peisongimg "><img src="img/arrow_right_gray.png"/></div>
+						</div>
+					</div>
+					<div id="userAddTwo">
+						<p>
+							所在地区：
+						</p>
+						<div id="clickEle">
+							
+							<select class="date clickselect">
+								<option value="">请选择省市区</option>
+								<option value="1">浙江省台州市 </option>
+								<option value="2">浙江省杭州市 </option>
+								<option value="3">浙江省建安市 </option>
+								<option value="4">浙江省绍兴市 </option>
+								<option value="5">浙江省义乌市 </option>
+								<option value="6">浙江省嘉兴市 </option>
+								<option value="7">浙江省宁波市 </option>
+							</select>
+							<div class="peisongimg"><img src="img/arrow_right_gray.png"/></div>
+						</div>
+					</div>
+					<div id="userAddThree">
+						<p>
+							详细地址：
+						</p>
+						<input id="userAddress" type="text" />	
+					</div>
+				</div>
+			</div>
+			<div id="seveadd">
+				保存地址
+			</div>
+		</form>
+		
+	
+	</body>
+</html>

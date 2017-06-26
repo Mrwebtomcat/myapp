@@ -1,0 +1,278 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>有鲜花的日子格外明媚</title>
+	<meta name="format-detection" content="telephone=no"/>
+	<meta name="format-detection" content="email=no" />
+	<meta name="format-detection" content="address=no" />
+	<meta name="format-detection" content="date=no" />
+   <link rel="stylesheet" type="text/css" href="css/Allcss.css"/> 
+   <link rel="stylesheet" type="text/css" href="css/index.css"/>
+   <link rel="stylesheet" type="text/css" href="css/swiper-3.4.2.min.css"/>
+   <script type="text/javascript"src="js/jquery.min.js"></script>
+    	<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+   <script type="text/javascript" src="js/jquery.cookie.js"></script>
+ 	<script type="text/javascript"src="js/common.js"></script>
+	<style type="text/css">
+		html{font-size:16px;}
+	</style>
+</head>
+
+<body>
+
+	<!--<div id="banner">
+		<img src="img/ban_1.png" alt="" />
+			<ul id="banner-click">
+				<li class="chick"></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+	</div>
+	-->
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+
+			</div>
+			<div class="swiper-pagination"></div>
+		</div>
+		
+		
+	<script type="text/javascript">
+		
+		
+	
+		
+	</script>
+	
+	
+	
+	
+	<div id="index-text" >
+		<p>简约中的美，初相遇的一抹惊艳</p><br />
+		<p>极致爱情的永恒绽放</p><br />
+		<p>从今天开始走向幸福之路</p><br />
+		
+	</div>
+	<div id="personcent" style="display:none">
+		<img src="img/usr.png" alt="" />
+	</div>
+	
+	<div id="Allflo" class="clearfox"><!--详情条-->
+			<!--<div class="onrow clearfox">-->
+			<div class="row row-left" >
+			
+			</div>
+			<div class="row row-right">
+				
+			</div>
+		<!--</div>-->
+	
+	
+		</div>
+	</div>
+
+	
+	
+	
+
+			
+			
+		
+	<script type="text/javascript">
+		var chickid=GetQueryString("chickid");
+		var forstchick=GetQueryString("forstchick");
+		var token=$.cookie('token'),
+			skip=0,take=10,images=[],Name1='',Name='';
+		 var mySwiprt=new Swiper(".swiper-container",{
+			pagination:'.swiper-pagination',
+			paginationClickable:true,
+//			longSwipesRatio:0.3,
+//			touchRatio:1,
+ 			initialSlide :0,
+			observer:true,//修改swiper自己或子元素时，自动初始化swiper
+//			observeParents:true,//修改swiper的父元素时，自动初始化swiper
+			direction:'horizontal',
+			loop:false,
+			slidesPerGroup: 1,  
+//			watchSlidesProgress : true,
+//			pagination:'.swiper-pagination',
+			speed:300,
+			autoplay : 1000,
+//			effect:"fade"
+				})
+		 
+		 var tue="";
+		 if(!forstchick){
+		 	tue=1;
+		 }
+		 if(forstchick=="qingxin"){
+		 	tue=2;
+		 }
+		 if(forstchick=="gaoduan"){
+		 	tue=3;
+		 }
+		 	//轮播图	
+			$.ajax({
+				type:"post",
+				url:server+'/api/Shop/GetImgRunner?skip=0&take=3&type='+tue,
+				dataType:"json",
+		 
+				success:function(data){
+					$("#personcent").show();
+					for(i=0;i<data.Result.rows;i++){
+				
+					$(".swiper-wrapper").append(
+						"<div class='swiper-slide'><img src='"+server+"/pic/"+data.Result.data[i].image+"'/></div>"
+					);}
+					}
+			})
+			
+		 
+		 
+		 
+		if(!chickid){
+			
+		
+			if(!forstchick){
+				
+					//详情
+			$.ajax({
+		 			type:"get",
+		 			url:server+"/api/Product/Get?token="+token+"&skip="+skip+"&take="+take,
+		 			dataType:"json",
+					success:function(data){
+						datsa(data);
+						}
+			 		});
+				
+			}else{
+				var skip=0,take=100;
+				if(forstchick=="qingxin"){
+					$.ajax({
+						type:"get",
+						url:server+'/api/Product/GetSingle?skip='+skip+'&take='+take,
+						success:function(data){
+							datsa(data);
+						}
+					});
+				}else{
+					$.ajax({
+						type:"get",
+						url:server+'/api/Product/GetSingletwo?skip='+skip+'&take='+take,
+						success:function(data){
+							datsa(data);
+						}
+					});
+					
+				}
+			}
+			 		
+			 		
+			 		
+			 		
+			 		
+			 		function datsa(data){
+			 			var producres=document.getElementById("producrers").innerHTML;
+						
+						var produs=[];
+						for(i=0;i<data.Result.rows;i++){
+								var imgss=data.Result.data[i].Image;
+								var img=imgss.split(";")
+								
+									produs[i]=producres.replace(reg,function(node,key){
+										return{
+											"dataId":data.Result.data[i].Id,
+											"Productimg":server+"/pic/"+img[0],
+											"Name":data.Result.data[i].Name,
+											"Synopsis":data.Result.data[i].Synopsis,
+											"Price":data.Result.data[i].Price
+											
+											}[key]
+										})
+								if(i%2!=0){
+									$(".row-right").append(produs[i])
+								}else{
+									$(".row-left").append(produs[i])
+								}
+								
+								
+							}
+					
+			 		}
+			
+		}
+		
+		if(chickid){
+			$(".row-left").hide();
+			$(".row-right").hide();
+		
+			//
+			var RunnerImage=[];
+			
+			$.ajax({
+		 			type:"post",
+		 			url:server+"/api/Shop/GetFreshRunner/"+chickid,
+		 			dataType:"json",
+					success:function(data){
+					RunnerImage=data.Result.RunnerImage.split(";");
+					console.log(RunnerImage.length)
+				for(i=0;i<RunnerImage.length;i++){
+					
+						$(".swiper-wrapper").append(
+						"<div class='swiper-slide'><img src='"+server+"/pic/"+RunnerImage[i]+"'/></div>"
+						)
+						
+					
+				}
+						
+						
+						$("#Allflo").html(data.Result.Contents)
+					}
+					});
+			}
+			
+			 		
+			 		
+			 		
+			 		
+			 		
+			 		
+			 		//产品连接获取id
+						function pros(obj){
+							var id=obj.attr("dataid");
+							location.href="ProductDetails.html?id="+id;
+						}
+		
+	</script>
+	
+<!--//单个详情页-->
+	<script type="text/html" id="producrers">
+		
+			<div class="onrow clearfox" dataid="[dataId]" onclick="pros($(this))">
+		
+			<div class="producreson clearfox">
+				
+			<img src="[Productimg]" alt="" /><!--图片--></div>
+				<div class="row-div">
+					<h5 class="row-div-h5">[Name]</h5>
+					<h6 class="row-div-h6">[Synopsis]</h4>
+					<p class="row-div-p">￥[Price]<span class="month">/月</span></p>
+					<a class="shop-a" href="javascript:void(0)">立即购买</a>
+				</div>
+				
+			</div>
+	</script>
+
+<!--连接-->
+<script type="text/javascript">
+	$("#personcent").bind("click",function(){
+		location.href="personalCenter.html";
+	})
+</script>
+
+
+</body>
+</html>

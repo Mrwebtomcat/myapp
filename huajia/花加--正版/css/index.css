@@ -1,0 +1,196 @@
+
+body{
+	font-family: PingFangSC-Regular;
+/*	font-size: 62.5%;*/
+}
+
+#banner{
+	width:100%;
+	position:relative;
+	text-align: center;
+	height: 26.4%;
+}
+#banner img{
+	z-index: 1;
+	display:inline-block;
+}
+/*#banner-float{
+	width:100%;
+
+	height:3.5%;
+	background:yellowgreen;
+	bottom:4%;
+	text-align: center;
+}*/
+#banner-li-box{
+	
+	margin:0 auto;
+	width:20%;
+	height: 26.4%;
+	background:red;
+}
+
+#banner-click{	
+
+
+	width:30%;
+	height:3.1%;
+	left:30%;
+	text-align: center;
+
+	display: inline-block;
+	position: absolute;
+	bottom:0.5rem;
+	margin-left: 14%;
+	
+}
+
+#banner-click li{
+	float:left;
+	background:#C0C0C0 ;
+	margin-right: 7%;
+	display: inline-block;
+	width:0.35rem;
+	height:0.35rem;
+	border-radius: 0.5rem;
+	z-index: 2;
+	
+}
+
+
+#banner-click .chick{
+		background:#FFFFFF;
+}
+
+
+#banner-click li:last-child{
+	
+	margin-right:none;
+}
+
+#index-text{
+	margin:1.4% auto 0;
+	/*height:10.6%; */
+	/*width:52.5%;*/
+	text-align: center;
+	color:#666666;
+	font-size: 12px;
+	
+}
+#index-text p{
+
+	line-height: 20px;
+    font-size: 12px;
+text-align: center;
+    display:inline-block;
+	
+}
+
+#personcent{
+	width:16%;
+	height:10%;
+	position: fixed;
+	bottom: 2rem;
+	left:1.5rem;
+	
+}
+
+
+.row{
+	
+	width:46.22%;
+}
+.row-left{
+	float:left;
+	margin:0 2.5%;
+/*	margin-bottom: 1.5%;*/
+
+}
+.row-right{
+	float: right;
+	margin-right:2.5%;
+	margin-left:0;
+
+}
+.onrow{
+	width:100%;
+	margin-top:10px;
+
+	
+}
+
+#Allflo{
+	margin-top:1.6%;
+}
+
+.row-div{
+	width:94%;
+	background:#ffffff;
+	height:31.3%;
+	margin-top:-2.03%;
+	padding-left:6%;
+	padding-top:1.4%;
+	padding-bottom: 2.3%;
+
+}
+.row-div-h5{
+	font-weight:500;
+	font-size:14px;;
+	padding-top: 8px;
+	color:#333333;
+}
+.row-div-h6{
+	font-size:10px;
+	line-height:15px;
+	color:#B2B2B2;
+	font-weight: 400;
+	padding-bottom: 5px;
+	width:108px;
+	display: block;
+	
+}
+.month{
+	font-size: 12px;
+	line-height: 14px;
+	letter-spacing:3px;
+}
+.row-div-p{
+	margin-top:0.5%;
+	font-size:16px;
+	line-height:18px;
+	color:#FF4949;
+	margin-left: -2px;
+	width:50%;
+	display:inline-block;
+}
+.shop-a{
+
+	float:right;
+	margin-right:6px;
+	margin-top: -2px;
+	padding:3px 9px;
+	border:0.5px solid #F67423;
+	color:#F67423;
+	font-size:9px;
+	line-height: 13px;
+	clear: both;
+	content:"";
+	display:inline-block;
+
+}
+.clearfox:after,.clearfox:before{
+	content: "";
+	clear: both;
+	display:block;
+}
+.producreson{
+	height: 10.85em;
+
+	/*width: 14.5em;*/
+	background: #fff;
+}
+.producreson img{
+	width:100%;
+
+}
+

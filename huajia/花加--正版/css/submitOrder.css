@@ -1,0 +1,276 @@
+html{
+		position: relative;
+}
+
+body{
+	height: 100%;
+	font-size: 0.9rem;
+}
+
+*::-webkit-input-placeholder { 
+color:#BAB8B8;
+} 
+*:-moz-placeholder { 
+color:#BAB8B8; 
+} 
+*:-ms-input-placeholder { 
+/* IE10+ */ 
+color:#BAB8B8;
+} 
+
+#orderHead{
+	color: #FFFFFF;
+	padding: 2.9% 5%;
+	height: 13%;
+	background: #57B9DE;
+}
+#userPhone{
+	font-size:0.8rem;
+	margin-left: 1rem;
+}
+#userAddress{
+	font-size:12px;
+	line-height: 17px;
+}
+#orderHead p{
+	padding: 1.5% 0;
+}
+
+#orderHead img{
+	color: #FFFFFF;
+	position: absolute;
+	top: 7%;
+	right:4%;
+	width: 2.5%;
+	height: 5%;
+}
+.proimgs{
+	display: inline-block;
+	width:64px;
+	/*height: 16.529%;*/
+	overflow: hidden;
+	font-size: 0;
+	
+}
+.commodity{
+	margin:1.6% 0;
+	background: white;
+	display: flex;
+	height:64px;
+	/*font-family: PingFangSC-Light;*/		/*11111111111*/
+	padding: 3%;
+}
+
+.commodity img{
+/*	width:100%;*/
+}
+
+.commodity span:nth-of-type(1){
+	width: 70%;
+	display: inline-block;
+}
+
+.commodity p{
+	width: 90%;
+	margin-left: 5%;
+	margin-top: 1%;
+	font-size: 13px;						
+	color: #333333;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#orderDescribe{
+
+	font-size: 12px;						
+	color: #939393;
+	
+}
+
+
+
+.commodity span:nth-of-type(2){
+	display: flex;
+    justify-content:center;
+    align-items:center;   
+
+}
+
+.orderMoney{
+	font-size:16px;
+	font-weight: 400;
+	color:red
+}
+
+#orderMsg{
+	width: 100%;
+	background: white;
+	padding-bottom: 2%;
+	margin-top: 0.27%;
+}
+
+.title{
+	padding: 0% 2.5%;
+	padding-top: 1%;
+	line-height:1.7rem;
+	font-size: 0.8rem;
+	font-weight: 600;
+	color:#6E6E6E 
+}
+
+.title:before{
+	content:"";
+	clear: both;
+	display:inline-block;
+	margin-right:5px;						/*11111111111*/
+	vertical-align: -10%;
+	width:0.15rem;							/*11111111111*/
+	height:1rem;							/*11111111111*/
+	background:black;
+}	
+
+#userMsg{
+	width: 94%;
+	display: block;
+	margin-left: 2.2%;
+	margin-right: 2%;
+	border: 1px solid #F0F0F0;
+	border-radius: 2px;
+	resize: none;
+	color: #999999;
+	margin-top: 2%;
+	font-size: 0.8rem;	
+	height:4.5rem;
+	text-indent: 1em;
+	padding:1% 0					
+}
+
+#checkOut{
+	margin-top: 1.5%;
+	padding: 5% 3%;
+	padding-left: 52%;
+	background: white;
+	text-align: right;
+}
+
+#checkOut p{
+	padding: 2% 0;
+	text-align: right;
+}
+
+#checkOut div{
+	display: inline-block;
+	width: 5.5rem;
+	text-align: right;
+	font-size: 12px;
+    line-height: 17px;
+    color: #666666;
+}
+#orderMoney,#orderOtherPay{
+	font-size: 1rem;
+	font-weight: 400;
+	float: right;
+	color:red;
+	text-align: right;
+}
+/*@media (min-width:300px) and (max-width:330px ) {
+	
+	#checkOut div{
+			width: 6.5rem;
+	}
+	
+}*/
+@media (min-width:330px) and (max-width:375px ) {
+	#orderDescribe{
+		font-size: 12px;						
+		color: #939393;
+	
+	}
+		#checkOut div{
+			width: 6.5rem;
+	}
+}
+
+
+@media (min-width:375px) and (max-width:400px ) {
+	#orderDescribe{
+			margin-top:0.8rem;
+			line-height: 12px;
+		}
+		#checkOut div{
+			width: 7.5rem;
+			font-size: 12px;
+    line-height: 17px;
+	}
+}
+
+@media (min-width:410px) and (max-width:600px) {
+	#orderName {
+    	width: 68%;
+    }
+	
+	#orderDescribe{
+			margin-top:1rem;
+			line-height: 1.4rem;
+		}
+		#checkOut div{
+			width:8rem;
+			font-size: 12px;
+    line-height: 17px;
+	}
+}
+
+@media (min-width:750px) and (max-width:1024px) {
+		.commodity p {
+			font-size:1.2rem;
+			margin-top: 6%;
+		}
+		.commodity{
+			padding-bottom: 1.1rem;
+		}
+		#orderDescribe{
+			font-size:1rem;
+			margin-top:1rem;
+			line-height: 1.4rem;
+		}
+	#checkOut div{
+			width:18.5rem;
+			font-size: 12px;
+    line-height: 17px;
+	}
+}
+
+
+@media screen and (min-width:1024px) {
+	#checkOut div{
+			width:25.5rem;
+			font-size: 12px;
+    line-height: 17px;
+	}
+}
+
+
+
+#submi{
+	    /* padding: 3% 0; */
+    width: 100%;
+    border: 0;
+    outline: 0;
+    height: 8.5%;
+    color: #FFFFFF;
+    font-size: 1.2rem;
+    background: #FF8C8C;
+    position: fixed;
+    bottom: 0px;
+    line-height: 51px;
+    text-align: center;
+}

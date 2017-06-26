@@ -1,0 +1,362 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="email=no" />
+		<meta name="format-detection" content="address=no" />
+		<meta name="format-detection" content="date=no" />
+	    <title>确认订单</title>
+	   	<link rel="stylesheet" type="text/css" href="css/Allcss.css"/> 
+	   	<link rel="stylesheet" type="text/css" href="css/submitOrder.css"/> 
+	   	<script type="text/javascript"src="js/common.js"></script>
+	   	<script type="text/javascript" src="js/jquery.min.js"></script>
+	   	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+
+	</head>
+	<body>
+		<form id="order" action="">
+			<!--地址-->
+			<div id="orderHead">
+				<div id="orderAdd" ></div>
+				<img src="img/arrow_right_white.png" alt="" />
+			</div>
+			
+			<script type="text/html"id="uesradds">
+					<div  data-id="[addId]" data-village="[village]">
+						<p>
+							<span id="userName">[uName]</span>
+							<span id="userPhone">[uPhone]</span>
+						</p>
+						<p id="userAddress">[uAdd]</p>
+					</div>
+			</script>
+			
+			
+			
+			<script>
+				
+			
+			</script>
+			
+			<!--地址-->
+			
+			<!--产品详情-->
+			<div class="commodity"></div>
+			<!--产品详情-->
+			
+			
+		
+			
+			<script type="text/html"id="producrersIDone">
+				
+					<div href="javascript:;" class="proimgs"><img id="ProductImg" src="[Image]" alt="" /></div>
+					<span>
+						<p id="orderName">[Name]</p>
+						<p id="orderDescribe">[Synopsis]</p>
+					</span>
+					<span class="orderMoney">￥[Price]</span>
+			</script>
+			
+			<!--产品详情-->
+			
+			
+			
+			<div id="orderMsg">
+				<p class="title">
+					备注留言
+				</p>
+				<textarea id="userMsg" name="" rows="3" cols="" placeholder="帮我放张小卡片：祝早日康复"></textarea>
+			</div>
+			<div id="checkOut">
+				<p>
+					<div>
+						商品总额：
+					
+					<span id="orderMoney">￥125</span></div>
+				</p>
+				<p>
+					<div>
+						运费：
+					
+					<span id="orderOtherPay">￥0</span></div>
+				</p>
+			</div>
+			<div id="submi">提交订单</div>
+		</form>
+		
+		
+		
+	
+		<script>
+			
+			//产品详情
+			var id=GetQueryString("id");
+			$(function(){
+				$.ajax({
+					type:"get",
+					url:server+'/api/Product/GetOne/'+id,
+					dataType:"json",
+					success:function(data){
+						var productersID=document.getElementById("producrersIDone").innerHTML;
+						var product=productersID.replace(reg,function(node,key){
+							return{
+									"Image":server+"/pic/"+data.Result.Image.split(";")[0],
+									"Name":data.Result.Name,
+									"Synopsis":data.Result.Synopsis,
+									"Price":data.Result.Price
+							}[key]
+						})
+					$(".commodity").html(product)
+					$("#orderMoney").text($(".orderMoney").text());
+						}
+					});
+				})
+				
+			//----产品详情
+			
+			//地址
+			var token=$.cookie("token");
+			var skip=0,take=10;
+			var village="";
+			var orderId=GetQueryString("dataId");
+			$(function(){
+				if(!orderId){
+					
+					$.ajax({
+				type:"get",
+				url:server+'/api/Address/Get?token='+token+"&skip="+skip+"&take="+take,
+				dataType:"json",
+				success:function(data){
+//					 window.location.reload();
+					var order=document.getElementById("uesradds").innerHTML;
+					if(data.Result.rows>0){
+						village=data.Result.data[0].Village;
+						var orderadd=order.replace(reg,function(node,key){
+							return {
+								"addId":data.Result.data[0].Id,
+								"village":escape(village),
+								"uName":data.Result.data[0].AddressName,
+								"uPhone":data.Result.data[0].Phone,
+								"uAdd":data.Result.data[0].Province+data.Result.data[0].City+data.Result.data[0].Area+data.Result.data[0].Address
+										
+								}[key]
+							})
+						}else{
+							village=0;
+							var orderadd=order.replace(reg,function(node,key){
+								return {
+									"addId":'',
+									"village":'0',
+									"uName":"请输入地址",
+									"uPhone":"    ",
+									"uAdd":"     "
+									}[key]
+								})
+							}
+				$("#orderAdd").html(orderadd);
+						//运费
+					var orderOtherPay=$("#orderOtherPay").text().replace(/[^\d.]/g,'');
+					var userAddress=$("#userAddress").text();
+					if(userAddress.slice(0,2)=="浙江"||userAddress.slice(0,2)=="上海"||userAddress.slice(0,2)=="江苏"){
+						orderOtherPay=0;
+					}else{
+						orderOtherPay=20;
+					}
+					$("#orderOtherPay").text("￥"+orderOtherPay)
+						
+				
+				$("#orderHead").click(function(){
+					village==0?location.href="change_msg.html?url="+'submitOrder.html&id='+id:location.href="address.html?url="+'submitOrder.html&id='+id;
+							})
+						}
+				})	
+				}else{
+					village=2;
+				$.ajax({
+				type:"get",
+				url:server+'/api/Address/GetOne/'+orderId+'?token='+token,
+				dataType:"json",
+				success:function(data){
+//					 window.location.reload();
+				
+				var order=document.getElementById("uesradds").innerHTML;
+				var orderadds=order.replace(reg,function(node,key){
+						return {
+							"addId":data.Result.Id,
+							"village":escape(data.Result.Village),
+							"uName":data.Result.AddressName,
+							"uPhone":data.Result.Phone,
+							"uAdd":data.Result.Province+data.Result.City+data.Result.Area+data.Result.Address
+							}[key]
+				})
+				console.log(data.Result.Village)
+					$("#orderAdd").html(orderadds);
+							//运费
+					var orderOtherPay=$("#orderOtherPay").text().replace(/[^\d.]/g,'');
+					var userAddress=$("#userAddress").text();
+					if(userAddress.slice(0,2)=="浙江"||userAddress.slice(0,2)=="上海"||userAddress.slice(0,2)=="江苏"){
+						orderOtherPay=0;
+					}else{
+						orderOtherPay=20;
+					}
+					$("#orderOtherPay").text("￥"+orderOtherPay)
+						
+				
+				$("#orderHead").click(function(){
+				location.href="address.html?url="+'submitOrder.html&id='+id;
+							})
+				}
+				})
+				
+					
+					
+					
+				}
+				
+				
+				
+			})
+			
+				
+			
+			//-----地址
+			
+			
+			//提交按钮
+			var order=GetQueryString("order");
+			var orderNObs=GetQueryString("orderNObs");
+			
+			$("#submi").bind("click",function(){
+				
+				
+				if(!order){
+					
+				if(village==0)return;
+				$.ajax({
+					type:"post",
+					url:server+"/api/Order/Subit?token="+token,
+					dataType:"json",
+					data:{
+							
+						   "tb_ProdtctId":id,
+							"TotalMoney":eval($("#orderMoney").text().replace(/[^\d.]/g,''))+eval($("#orderOtherPay").text().replace(/[^\d.]/g,'')),
+							"Payment": "微信支付",
+							"Remarks": $("#userMsg").val(),
+							"DeliveryName": $("#userName").text(),
+							"DeliveryPhone": $("#userPhone").text(),
+							"DeliveryAddress": $("#userAddress").text(),
+							"CanDelivery": village,
+							"DeliveryMode":$("#orderDescribe").text()
+					},
+					success:function(data){
+						if(data.Code=100){
+							
+							Wechatplay(2,data.Result.TotalMoney,data.Result.OrderNo,data.Result.Id)
+							
+											}
+							}
+						});
+					
+				}else{
+					var TotalMoney= eval($("#orderMoney").text().replace(/[^\d.]/g,''))+eval($("#orderOtherPay").text().replace(/[^\d.]/g,''))
+					Wechatplay(2,TotalMoney,orderNObs,order)
+//					console.log(TotalMoney,orderNObs)
+					
+					
+				}
+				
+				function Wechatplay(payTypes,TotalMoney,OrderNo,OrderId){
+					//WECHAT支付开始
+							var payType = payTypes;
+		                    var totalPrice = TotalMoney;//data.Result.TotalMoney;
+		                    var orderNum = OrderNo;//data.Result.OrderNo;
+		                    var OrderId=OrderId;
+		                    if (payType == 1) {
+	                           
+                      		} else {
+                          
+                            	fPostCharge();
+                           
+                            	function fPostCharge() {
+                                	if (totalPrice > 0) {
+                                   		$.ajax({
+	                                        type: "post",
+	                                        data: { "totalfee": totalPrice, "orderNum": orderNum, "token": token},
+	                                        url: "/Recharge/MeterRechargePay",
+	                                        success: function (json) {
+	                                            //var json = eval("(" + msg + ")");//转换后的JSON对象
+	                                            onBridgeReady(json);
+	                                        },
+	                                        error: function () {
+	                                            alert("提示", '调用微信支付模块失败，请稍后再试。', 'info')
+	                                        }
+	                                    })
+	                                }
+                               		else {
+                                   		alert("房间名或者充值金额不可以为空或者为负数,请确认后再试.")
+                                		}
+                           			}
+                            //调用微信支付模块
+                            function onBridgeReady(json) {
+                                WeixinJSBridge.invoke(
+                                        'getBrandWCPayRequest', {
+                                            "appId": json.appId,     //公众号名称，由商户传入
+                                            "timeStamp": json.timeStamp,         //时间戳，自1970年以来的秒数
+                                            "nonceStr": json.nonceStr, //随机串
+                                            "package": json.packageValue,
+                                            "signType": "MD5",         //微信签名方式:
+                                            "paySign": json.paySign //微信签名
+                                        },
+                                        function (res) {
+                                            if (res.err_msg == "get_brand_wcpay_request:ok") {
+                                                //alert("支付成功,请稍后查询余额,如有疑问,请联系管理员.");
+                                                window.location.href = '../WXView/orderDetails.html?orderID='+OrderId;
+                                                fAlreadyPay();
+                                            }     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+                                        }
+                                );
+                            }
+						}
+							//---WECHAT支付结束
+					
+				}
+							
+						
+				})
+				//---提交按钮
+		</script>
+		
+		<!--<script type="text/javascript">
+			$(function () {
+				var needRefresh = sessionStorage.getItem("need-refresh");
+				    if(needRefresh){
+				        sessionStorage.removeItem("need-refresh");
+				        location.reload();
+				    }
+				});
+				
+		</script>-->
+		<!--微信浏览器返回刷新--未完成-->
+		
+		<!--
+        	作者：280374065@qq.com
+        	时间：2017-05-08
+        	描述：5-8
+        	
+        -->
+		<!--<script type="text/javascript">
+			$("#submi").bind("click",function(){
+				location.href="orderDetails.html";
+			})
+			$("#orderHead").bind("click",function(){
+				location.href="change_msg.html";
+				
+			})
+		</script>-->
+		
+		
+	</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="email=no" />
+		<meta name="format-detection" content="address=no" />
+		<meta name="format-detection" content="date=no" />
+	    <title>地址库</title>
+	   	<link rel="stylesheet" type="text/css" href="css/Allcss.css"/> 
+	   	<link rel="stylesheet" type="text/css" href="css/address.css"/> 
+	   	<script type="text/javascript"src="js/common.js"></script>
+	   	<script type="text/javascript" src="js/jquery.min.js"></script>
+	   	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+	   	
+	</head>
+	<body>
+		<div id="addres"></div>
+
+	
+	<span id="seveadd">添加地址</span>
+	
+	
+	<script id="sevead">
+//		$(".addWrap").lastChild().css("margin-bottom","200px")
+		
+		$(".addWrap:last").css("margin-bottom","160px")
+	</script>
+	
+	
+	
+	<script type="text/html" id="Alladd">
+		<div class='addWrap' onclick="Alladdone($(this),event) "data-id='[dataId]'>
+			<div class="content">
+				<p>
+					<span class='userName'>[Name]</span>
+					<span class="userPhone">[Phone]</span>
+				</p>
+				<p>[address]</p>
+				<p>
+					<i class="addSelect"></i>
+					<span data-id="[uAddid]" onclick="morenAdd($(this),event)">设为默认</span>
+					<a class="addEdit" onclick="del($(this),event)">删除</a>
+					<a class='addDele' onclick="updateAdd($(this),event)">编辑</a>
+				</p>
+			</div>
+		</div>
+	</script>
+	
+	
+	<script type="text/javascript">
+		var url=GetQueryString("url");
+		var id=GetQueryString("id");
+		var token=$.cookie("token");
+		var skip=0,take=10;
+		//获取账号的全部地址
+		$.ajax({
+			type:"get",
+			url:server+'/api/Address/Get?token='+token+'&skip='+skip+'&take='+take,
+			dataType:"json",
+			success:function(data){
+				var Alladd=document.getElementById("Alladd").innerHTML;
+				var allad=[];
+				for(i=0;i<data.Result.rows;i++){
+					
+					allad[i]=Alladd.replace(reg,function(node,key){
+						return{
+							"uAddid":data.Result.data[i].Id,
+							"dataId":data.Result.data[i].Id,
+							"Name":data.Result.data[i].AddressName,
+							"Phone":data.Result.data[i].Phone,
+							"address":data.Result.data[i].Province+data.Result.data[i].City+data.Result.data[i].Area+data.Result.data[i].Address
+						}[key]
+					})
+					
+					$("#addres").append(allad[i])
+					
+				}
+			
+			
+		
+			
+			}
+			
+		});
+		
+			function Alladdone(obj,event){
+				event.stopPropagation(); 
+				var dataId=obj.attr("data-id");
+				if(!url){
+					return;
+				}else{
+					location.href=url+'?dataId='+dataId+'&id='+id;
+				}
+			
+				
+				
+			}
+			
+			function del(obj,event){
+				event.stopPropagation(); 
+				var UpdatAddId=obj.prevAll("span").attr("data-id");
+				var token=$.cookie("token");
+				$.ajax({
+					type:"post",
+					url:server+'/api/Address/Delete/'+UpdatAddId+'?token='+token,
+					dataType:"json",
+					success:function(data){
+						alert("已删除")
+						 window.location.reload();
+					}
+				});
+				
+			}
+			function updateAdd(obj,event){
+				event.stopPropagation(); 
+				var UpdatAddId=obj.prevAll("span").attr("data-id");
+				location.href="change_msg.html?url=address.html&UpdatAddId="+UpdatAddId+"&id="+id;
+				
+			}
+			
+			function morenAdd(obj,event){
+				event.stopPropagation();
+				
+			}
+		
+		$("#seveadd").bind("click",function(){
+			location.href="change_msg.html?url=address.html&id="+id;
+			
+		})
+		sessionStorage.setItem("need-refresh", true);
+		
+	</script>
+	
+	
+	</body>
+</html>

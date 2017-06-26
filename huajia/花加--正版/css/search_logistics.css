@@ -1,0 +1,163 @@
+li{list-style:none;}
+div{background:#FFFFFF;}
+#logistics_head{
+	width:100%;
+}
+body:{
+	width:100% ;
+}
+
+#imgWrap{
+	margin:6% 0;
+	margin-left: 7%;
+	width: 13rem;
+	height: 13rem;
+	border-radius:50%;
+	background:#FF8C8C;
+	display: inline-block;
+}
+	
+#msgWrap{
+	margin-left: 8%;
+	padding-top: 5%;
+	width: 54%;
+	font-size: 2.3rem;					
+	color: #666666;
+	display: inline-block;
+
+}
+
+#msgWrap li{
+	padding: 2%;
+
+}
+
+#msgWrap li span{
+	/*font-family: ArialMT;*/			
+}
+
+#state{
+	color: red;
+}
+
+#logistics_body{
+	margin:1% auto;
+	padding:0 4%;
+	background:#FFFFFF;
+	font-size:1.8rem;
+	position: relative;
+}
+#logistics_body ul{
+	padding-top:0.5rem;
+}
+#logistics_body li{
+	width:96%;
+	height:14%;
+	font-size:2.3rem;
+	margin-left:2.5rem;
+	text-align: left;
+	position: relative;
+	border-left:#D7D7D7 0.1rem solid;
+	color:#999999;
+
+}
+#logistics_body ul:before{
+	content:"";
+	display:inline-block;
+	background: #fdfdfd;
+    width: 4rem;
+    height:5rem;
+    position: absolute;
+    z-index: 20;
+    top:0;
+	
+}
+#logistics_body ul:after{
+	content:"";
+	display:inline-block;
+	background: #fdfdfd;
+    width: 4rem;
+    height:12rem;
+    position: absolute;
+    z-index: 20;
+    bottom:0;
+	
+}
+#logistics_body li:before{
+	
+	content: "";
+	display:inline-block;
+	background:#C8C8C8;
+	position:absolute;
+	width:3rem;
+	height:3rem;
+	top:4.9rem;
+	left:-1.8rem;
+	border-radius: 2rem;
+	border:0.2rem solid #FFFFFF;
+	box-shadow:0 0 1rem #C8C8C8 ;
+	z-index: 25;
+	
+	
+}
+#logistics_body li:last-child div{
+	border:0;
+}
+
+/*已完成的物流颜色*/
+
+
+#logistics_body li:first-child:before{
+	
+	background:#333333;
+	box-shadow:0 0 1rem  #333333 ;
+
+	
+	
+}
+
+#logistics_body li:first-child{
+	color: #333333;
+}
+
+
+
+
+#logistics_body li div{
+	height:11.5rem;
+	padding-bottom: 3.6rem;
+	padding-top: 2.9rem;
+	margin: 0 3rem 0rem 6rem;
+	border-bottom:0.01rem #ccc solid;
+    line-height: 3.2rem;	
+}
+#logistics_body li div p:nth-of-type(1){
+	margin-top:1rem ;
+}
+#logistics_body li div p:nth-of-type(2){
+	margin-top:1.2rem ;
+}
+
+@media screen and (max-width: 860px) {
+    #imgWrap{
+		width: 10rem;
+		height: 10rem;
+	}
+    #msgWrap{
+    	vertical-align: 100%;
+		font-size: 1rem;					
+	}
+}
+
+@media screen and (max-width: 476px) {
+	#imgWrap{
+		width: 6rem;
+		height: 6rem;
+	}
+		
+	#msgWrap{
+    	vertical-align: 50%;
+		font-size: 0.6rem;						
+	
+	}
+}

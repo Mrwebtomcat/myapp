@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="email=no" />
+		<meta name="format-detection" content="address=no" />
+		<meta name="format-detection" content="date=no" />
+	    <title>个人中心</title>
+	<script src="js/jquery-1.9.1.js"></script>
+        <script src="js/jquery-ui.js"></script>
+        
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery.cookie.js"></script>
+        <script type="text/javascript" src="js/common.js"></script>
+	   	<link rel="stylesheet" type="text/css" href="css/Allcss.css"/> 
+	   	<link rel="stylesheet" type="text/css" href="css/personalCenter.css"/> 
+        <script>
+        $(function () {
+            var ntoken = $.cookie('token');
+            $.ajax({
+                url: server + '/api/user/Gets?token=' + ntoken,
+                dataType: "json",
+                success: function (data) {
+                    if (data.Code==100) {
+                        $("#imgs").attr('src', data.Result.WxHearImg);
+                        $("#userName").html(data.Result.NickName);
+                    }
+                    
+                },
+                error: function (datas) {
+                    //location.href = "Login.html";
+                }
+            });
+            $.ajax({
+                url: server + '/api/Order/GetPendingPaynumber?token=' + ntoken,
+                dataType: "json",
+                success: function (data) {
+                    if (data.Code == 100) {
+                        var PendingPayNum = data.Result.PendingPayNum == "0" ? "" : data.Result.PendingPayNum;
+                        if (data.Result.PendingPayNum > 0) {
+                            $("#PendingPayNum").html("<span class='begnab'>" + PendingPayNum + "</span>");
+                        }
+                        //$("#PendingPayNum").html(data.Result.PendingPayNum == "0" ? "" : data.Result.PendingPayNum);
+                        //$("#PendingDeliverNum").html(data.Result.PendingDeliverNum == "0" ? "" : data.Result.PendingDeliverNum);
+                        var PendingDeliverNum = data.Result.PendingDeliverNum == "0" ? "" : data.Result.PendingDeliverNum;
+                        if (data.Result.PendingDeliverNum > 0) {
+                            $("#PendingDeliverNum").html("<span class='begnab'>" + PendingDeliverNum + "</span>");
+                        }
+                        //$("#PendingReceiptNum").html(data.Result.PendingReceiptNum == "0" ? "" : data.Result.PendingReceiptNum);
+                        var PendingReceiptNum = data.Result.PendingReceiptNum == "0" ? "" : data.Result.PendingReceiptNum;
+                        if (data.Result.PendingReceiptNum > 0) {
+                            $("#PendingReceiptNum").html("<span class='begnab'>" + PendingReceiptNum + "</span>");
+                        }
+                        var OKNum = data.Result.OKNum == "0" ? "" : data.Result.OKNum;
+                        if (data.Result.OKNum > 0) {
+                            $("#OKNum").html("<span class='begnab'>" + OKNum + "</span>");
+                        }
+                    }
+                },
+
+                error: function (datas) {
+                    //location.href = "Login.html";
+                }
+            });
+        })
+        </script>
+	</head>
+	<body>
+		<div id="centerWrap">
+			<div id="centerHead">
+				<div id="headPor">
+					<img src="" id="imgs" alt="" />
+					<p id="userName">
+						
+					</p>
+				</div>
+				<div id="headBtn">
+					
+					<div class="begbox-posen" id="daifukuan">
+						<div class="beg-min">
+							<img src="img/待付款icon.png"/>
+                            <p id="PendingPayNum"></p>
+							<!--<span class="begnab" id="PendingPayNum"></span>-->
+						
+						</div>
+						<span class="begbox-text">待付款</span>
+					</div>
+					<div class="begbox-posen" id="daifahuo">
+						<div class="beg-min">
+							<img class="daifahu" src="img/待发货icon.png" alt="" />
+                            <p id="PendingDeliverNum"></p>
+                            <!--<span class="begnab" id="PendingDeliverNum"></span>-->
+							
+						</div>
+						<span class="begbox-text">待发货</span>
+					</div>
+					<div class="begbox-posen" id="daishouhuo">
+						<div class="beg-min">
+							<img src="img/待收货icon.png" alt="" />
+                            <p id="PendingReceiptNum"></p>
+                            <!--<span class="begnab" id="PendingReceiptNum"></span>-->
+							
+						</div>
+						<span class="begbox-text">待收货</span>
+					</div>
+					<div class="begbox-posen" id="yiwancheng">
+						<div class="beg-min">
+							<img src="img/已完成icon.png"/>
+                            <p id="OKNum"></p>
+							
+						</div>
+						<span class="begbox-text">已完成</span>
+					</div>
+					
+				
+				</div>
+			</div>
+			<div id="centerBody">
+				<p>
+					<img src="img/地址icon.png" alt="" />
+					<a>
+						地址库管理
+					</a>
+					<img src="img/arrow_right_gray.png"></img>
+				</p>
+				<p>
+					<img src="img/改单icon.png" alt="" />
+					<a>
+						自助改单
+					</a>
+					<img src="img/arrow_right_gray.png"></img>
+				</p>
+				<p>
+					<img src="img/礼物icon.png" alt="" />
+					<a>
+						转赠他人
+					</a>
+					<img src="img/arrow_right_gray.png"></img>
+				</p>
+				<p>
+					<img src="img/帮助icon.png" alt="" />
+					<a>
+						常见问题
+					</a>
+					<img src="img/arrow_right_gray.png"></img>
+				</p>
+				<p>
+					<img src="img/客服icon.png" alt="" />
+					<a id="phons">
+						<span id="lastOne">
+							联系客服
+						</span>
+						<span id="lastTwo">
+							0576-88919160
+						</span>
+					</a>
+					<img src="img/arrow_right_gray.png"></img>
+				</p>
+			</div>
+		</div>
+		<style>
+			a:visited{
+				color:#6F6F6F
+			}
+			a:link{color:#6F6F6F}
+		</style>
+		<!--
+        	作者：280374065@qq.com
+        	时间：2017-05-08
+        	描述：5-8
+        -->
+        
+        <script type="text/javascript">
+        	$("#centerBody").find("p").eq(0).bind("click",function(){
+        		location.href="address.html";
+        	})
+        	
+        	
+        	$("#daifukuan").bind("click",function(){
+        		location.href="orderList.html?State=No1";
+        	})
+        	$("#daifahuo").bind("click",function(){
+        		location.href="orderList.html?State=Yes2";
+        	})
+        	$("#daishouhuo").bind("click",function(){
+        		location.href="orderList.html?State=chack3";
+        	})
+        	$("#yiwancheng").bind("click",function(){
+        		location.href="orderList.html?State=OK4";
+        	})
+        	
+        	
+        	
+        	$("#centerBody").find("p").eq(3).bind("click",function(){
+        		location.href="common_problem.html";
+        	})
+        	$("#centerBody").find("p").eq(1).bind("click",function(){
+        		location.href="orderList.html?State=Yes2";
+        	})
+        	$("#centerBody").find("p").eq(2).bind("click",function(){
+        		location.href="orderList.html?State=Yes2";
+        	})
+        	$("#phons").click(function(){
+        		$(this).attr("href","tel://0576-88919160")
+        	})
+        </script>
+	</body>
+</html>

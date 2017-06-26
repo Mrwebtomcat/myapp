@@ -1,0 +1,43 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>登录</title>
+
+    <script src="js/jquery.min.js"></script>
+
+    <script src="js/common.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1,
+maximum-scale=1, user-scalable=no">
+</head>
+
+<body>
+  
+  
+  
+    <script>
+    	
+  
+    $(function (){
+    var uname = "11";
+      var pwd = "11";
+          $.ajax({
+              url: server + '/api/Login/SignInByAdName?uname=' + uname + '&pwd=' + pwd,
+              dataType: "json",
+              success: function (data) {
+                  var token = data.Token;
+                  $.cookie('token', token);
+                  if (data.Code==100) {
+                      location.href = "index.html";
+                  }
+                  
+                  //location.href = "../WXLand/WebForm1.aspx?token=" + token;
+              }
+          });
+ 	
+    })
+    </script>
+</body>
+</html>

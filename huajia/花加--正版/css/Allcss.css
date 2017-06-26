@@ -1,0 +1,17 @@
+div,a,img,li,ul,body,h3,h2,h1,h4,h5,h6,p,span,html{margin:0;padding:0}
+a{
+	text-decoration: none;
+}
+body{
+
+	background:#EDEDED;
+}
+img{width:100%;height:100%}
+li{list-style: none;}
+
+.clearfox:after,.clearfox:before{
+	content:"";
+	clear: both;
+	display:block;
+	
+}

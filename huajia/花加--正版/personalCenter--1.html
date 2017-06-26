@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="email=no" />
+		<meta name="format-detection" content="address=no" />
+		<meta name="format-detection" content="date=no" />
+	    <title>个人中心</title>
+	<script src="js/jquery-1.9.1.js"></script>
+        <script src="js/jquery-ui.js"></script>
+        
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery.cookie.js"></script>
+        <script type="text/javascript" src="js/common.js"></script>
+	   	<link rel="stylesheet" type="text/css" href="css/Allcss.css"/> 
+	   	<link rel="stylesheet" type="text/css" href="css/personalCenter.css"/> 
+        <script>
+        $(function () {
+            var ntoken = $.cookie('token');
+            $.ajax({
+                url: server + '/api/user/Gets?token=' + ntoken,
+                dataType: "json",
+                success: function (data) {
+                    if (data.Code==100) {
+                        $("#imgs").attr('src', data.Result.WxHearImg);
+                        $("#userName").html(data.Result.NickName);
+                    }
+                    
+                },
+                error: function (datas) {
+                    location.href = "Login.html";
+                }
+            });
+        })
+        </script>
+	</head>
+	<body>
+		<div id="centerWrap">
+			<div id="centerHead">
+				<div id="headPor">
+					<img src="" id="imgs" alt="" />
+					<p id="userName">
+						
+					</p>
+				</div>
+				<div id="headBtn">
+					
+					<div class="begbox-posen" id="daifukuan">
+						<div class="beg-min">
+							<img src="img/待付款icon.png"/>
+							<!--<span class="begnab">1</span>-->
+						
+						</div>
+						<span class="begbox-text">待付款</span>
+					</div>
+					<div class="begbox-posen" id="daifahuo">
+						<div class="beg-min">
+							<img class="daifahu" src="img/待发货icon.png" alt="" />
+				
+							
+						</div>
+						<span class="begbox-text">待发货</span>
+					</div>
+					<div class="begbox-posen" id="daishouhuo">
+						<div class="beg-min">
+							<img src="img/待收货icon.png" alt="" />
+							
+							
+						</div>
+						<span class="begbox-text">待收货</span>
+					</div>
+					<div class="begbox-posen" id="yiwancheng">
+						<div class="beg-min">
+							<img src="img/已完成icon.png"/>
+						
+							
+						</div>
+						<span class="begbox-text">已完成</span>
+					</div>
+					
+				
+				</div>
+			</div>
+			<div id="centerBody">
+				<p>
+					<img src="img/地址icon.png" alt="" />
+					<a>
+						地址库管理
+					</a>
+					<img src="img/arrow_right_gray.png"></img>
+				</p>
+				<p>
+					<img src="img/改单icon.png" alt="" />
+					<a>
+						自助改单
+					</a>
+					<img src="img/arrow_right_gray.png"></img>
+				</p>
+				<p>
+					<img src="img/礼物icon.png" alt="" />
+					<a>
+						转赠他人
+					</a>
+					<img src="img/arrow_right_gray.png"></img>
+				</p>
+				<p>
+					<img src="img/帮助icon.png" alt="" />
+					<a>
+						常见问题
+					</a>
+					<img src="img/arrow_right_gray.png"></img>
+				</p>
+				<p>
+					<img src="img/客服icon.png" alt="" />
+					<a>
+						<span id="lastOne">
+							联系客服
+						</span>
+						<span id="lastTwo">
+							0576-88919160
+						</span>
+					</a>
+					<img src="img/arrow_right_gray.png"></img>
+				</p>
+			</div>
+		</div>
+		<!--
+        	作者：280374065@qq.com
+        	时间：2017-05-08
+        	描述：5-8
+        -->
+        
+        <script type="text/javascript">
+        	$("#centerBody").find("p").eq(0).bind("click",function(){
+        		location.href="address.html";
+        	})
+        	
+        	
+        	$("#daifukuan").bind("click",function(){
+        		location.href="orderList.html?State=No1";
+        	})
+        	$("#daifahuo").bind("click",function(){
+        		location.href="orderList.html?State=Yes2";
+        	})
+        	$("#daishouhuo").bind("click",function(){
+        		location.href="orderList.html?State=chack3";
+        	})
+        	$("#yiwancheng").bind("click",function(){
+        		location.href="orderList.html?State=OK4";
+        	})
+        	
+        	
+        	
+        	$("#centerBody").find("p").eq(3).bind("click",function(){
+        		location.href="common_problem.html";
+        	})
+        	$("#centerBody").find("p").eq(1).bind("click",function(){
+        		location.href="orderList.html?State=Yes2";
+        	})
+        	$("#centerBody").find("p").eq(2).bind("click",function(){
+        		location.href="search_logistics.html";
+        	})
+        </script>
+	</body>
+</html>
