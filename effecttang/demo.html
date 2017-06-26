@@ -1,0 +1,79 @@
+<!doctype html> <!--HTML5页面文档的声明-->
+<html><!--页面最外部结构-->
+ <head><!--网页的头部-->
+	<!--charset="编码集" utf-8 国际编码   gbk  gbk2312 中文-->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="keywords" content="关键词的内容36个字范围内" />
+	<meta name="description" content="关键词描述 76字范围内" />
+	<title>phone show tangjingqi</title>
+	<!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+	<script type="text/javascript" src="js/bootstrap.js"></script> -->
+	<!--CSS层叠样式表-->
+	<style>
+	    /*css rest*/
+        body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td{margin: 0;padding: 0;}
+		body{background:#000;}
+	</style>
+
+ </head>
+ <body><!--网页的主体-->
+
+  <canvas id="canv" width="432" height="719"></canvas>
+	<script type="text/javascript">var c, $, t;
+		t = 0;
+		c = document.getElementById('canv');
+		$ = c.getContext('2d');
+		c.width = window.innerWidth;
+		c.height = window.innerHeight;
+		$.fillStyle = 'hsla(200, 85%, 20%,1)';
+
+		window.addEventListener('resize', function() {
+		  c.width = window.innerWidth;
+		  c.height = window.innerHeight;
+		}, false);
+
+		function draw() {
+		 // $.globalCompositeOperaton = 'source-over';
+		  $.fillStyle = 'hsla(200, 85%, 20%, .1)';
+		  $.fillRect(0, 0, c.width, c.height);
+		  //$.fill();
+		  var foo, i, j, r;
+
+		  foo = 100 / Math.sin(t) *  Math.PI / 3;
+		  for (i = j = 0; j < 1050; i = ++j) {
+			r = 50 * Math.sin(i / foo);
+
+			$.beginPath();
+			$.fillStyle = 'hsla(255,255%,255%, 1)';
+			$.beginPath();
+			$.arc(Math.sin(i) * r * i + (c.width / 2),
+			  Math.cos(i) * r * i + (c.height / 2),
+			  10, 0, Math.PI * 2);
+			$.fill();
+
+		  }
+		  t += 0.00005;
+		  return t %= 5;
+
+		};
+		window.requestAnimFrame = (function() {
+		  return window.requestAnimationFrame ||
+			window.webkitRequestAnimationFrame ||
+			window.mozRequestAnimationFrame ||
+			window.oRequestAnimationFrame ||
+			window.msRequestAnimationFrame ||
+			function(callback) {
+			  window.setTimeout(callback, 1000 / 60);
+			};
+		})();
+
+		function run() {
+		  window.requestAnimFrame(run);
+		  draw();
+		}
+		run();
+		
+	</script>
+ </body>
+</html>

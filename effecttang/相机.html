@@ -1,0 +1,253 @@
+<!doctype html> <!--HTML5页面文档的声明-->
+<html><!--页面最外部结构-->
+ <head><!--网页的头部-->
+	<!--charset="编码集" utf-8 国际编码   gbk  gbk2312 中文-->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="keywords" content="关键词的内容36个字范围内" />
+	<meta name="description" content="关键词描述 76字范围内" />
+	<title>相机phone show tangjingqi</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+	<script type="text/javascript" src="js/bootstrap.js"></script>
+	<!--CSS层叠样式表-->
+	<style>
+	    /*css rest*/
+        body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td{margin: 0;padding: 0;}
+		  body{
+			font-family: sans-serif;
+			overflow: hidden;
+			
+		  }
+
+		  img{
+			vertical-align: middle;
+			position: relative;
+			left: -115px;
+			top: -115px;
+			
+		  }
+		  *{
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		  
+		  }
+
+		  .modal{
+			width: 250px;
+			height: 250px;
+			box-shadow:  0 0 10px rgba(255,255,255,.5);
+			text-align: center;
+			font-size: 1em;
+			color: #333;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			opacity: 0;
+			-webkit-transition:opacity 850ms 800ms;
+			transition:opacity 850ms 800ms;
+			border-radius: 15px;
+			z-index: 2;
+		}
+		.modal-wrap{
+		  z-index: 1;
+		  position: fixed;
+		  top: 0;
+		  left: 0;
+		  right: 0;
+		  bottom: 0;
+		}
+		.modal-surround{
+		  position: absolute;
+		  top: 0;
+		  left: 0;
+		  right: 0;
+		  bottom: 0;
+		  background: rgba(0,0,0,.8);
+		  text-align: center;
+		  -webkit-transition:opacity 850ms 800ms;
+		  transition:opacity 850ms 800ms;
+		  z-index: 1;
+		  opacity: 0;
+		}
+		.modal-target{
+		  border-radius: 15px;
+		  height: 100%;
+		  background-repeat: no-repeat;
+		}
+
+		.modal-close{
+		  text-decoration: none;
+		  color: lightblue;
+		  font-size: 3em;
+		  position: absolute;
+		  top: -1em;
+		  right: -1em
+		}
+
+
+		.camera{
+		  z-index: 2;
+		  position: absolute;
+		  top: 0;
+		  left: 0;
+		  right: 0;
+		  bottom: 0;
+
+		}
+
+
+		:target {
+		  z-index: 3
+		}
+		:target  .modal,:target  .modal-surround{
+		  opacity: 1;
+		}
+
+
+
+		[href="#modal-wrap"] {
+		  cursor: none;
+		  display: block;
+		  text-align: center;
+		  width: 250px;
+		  height: 250px;
+		  position: absolute;
+		  box-shadow: 0 0 10px 2222px rgba(0,0,0,.8);
+		  border-radius: 25px;
+		  position: relative;
+		  z-index: 3;
+		  padding: 15px;
+		  -webkit-transition: opacity 450ms linear;
+		  transition: opacity 450ms linear;
+		}
+
+
+		.camera-square{
+		  width: 50px;
+		  height: 50px;
+		  border: 2px solid gold;
+		  position: absolute;
+
+		}
+		.camera-square:first-of-type{
+		  border-radius: 15px 0 0 0;
+		  top: 15px;
+		  left: 15px;
+		  border-bottom-color: transparent;
+		  border-right-color: transparent;
+		}
+		.camera-square:nth-of-type(2){
+		  right: 15px;
+		  left: auto;
+		  border-radius: 0 15px 0 0;
+		  border-bottom-color: transparent;
+		  border-left-color: transparent;
+		}
+
+		.camera-square:nth-of-type(3){
+		  top: auto;
+		  bottom: 15px;
+		  left: 15px;
+		  border-radius: 0 0 0 15px;
+		  border-top-color: transparent;
+		  border-right-color: transparent;
+		}
+
+		.camera-square:last-of-type{
+		  top: auto;
+		  bottom: 15px;
+		  right: 15px;
+		  left: auto;
+		  border-radius: 0 0 15px 0;
+		  border-top-color: transparent;
+		  border-left-color: transparent;
+		}
+
+		.camera-circle{
+		  width: 50px;
+		  height: 50px;
+		  position: absolute;
+		  border: 2px solid gold;
+		  border-radius: 50%;
+		  left: 50%;
+		  top: 50%;
+		  transform: translate(-50%,-50%);
+		}
+
+		.camera-circle:before{
+		  content: '';
+		  position: absolute;
+		  top: 8px;
+		  left: 8px;
+		  right: 8px;
+		  bottom: 8px;
+		  border-radius: 50%;
+		  border: 2px solid gold
+		}
+
+	</style>
+
+ </head>
+ <body><!--网页的主体-->
+	
+   <a href="#modal-wrap">
+	  <div class="camera-square"></div>
+	  <div class="camera-square"></div>
+	  <div class="camera-square"></div>
+	  <div class="camera-square"></div>
+	  <span class="camera-circle"></span>
+	</a>
+
+
+	<div class="camera" id="camera">
+	  <img src="http://imgh.us/1-min.jpg" alt="">
+	</div>
+
+	<div class="modal-wrap" id="modal-wrap">
+	  <div class="modal-surround" id="modal-surround"></div>
+	  <div class="modal" id="modal">
+		<div id="modal-target" class="modal-target"></div>
+		<a href="#" class="modal-close" id="modal-close">×</a>
+	  </div>
+	</div>
+
+	<audio src="https://raw.githubusercontent.com/mahmoudZakaria90/myCodePenStuff/master/audio/camera-shutter-click-03.mp3">
+	</audio>
+	<script type="text/javascript">
+		window.location.href = '#'
+
+		var cameraCursor = document.querySelector('[href="#modal-wrap"]')
+		var cameraWrap = document.getElementById('camera')
+		var modalTarget = document.getElementById('modal-target')
+		var img = document.getElementsByTagName('img')[0]
+		var sound = document.getElementsByTagName('audio')[0]
+		var modalClose = document.getElementById('modal-close')
+
+		window.addEventListener('mousemove', function(e) {
+		  cameraCursor.style.top = e.clientY - (cameraCursor.offsetHeight - (cameraCursor.offsetHeight / 2)) + 'px';
+		  cameraCursor.style.left = e.clientX - (cameraCursor.offsetWidth - (cameraCursor.offsetWidth / 2)) + 'px';
+		})
+
+		cameraCursor.addEventListener('click', function(e) {
+		  this.style.cursor = "default"
+		  this.style.opacity = "0"
+		  sound.play()
+		  var o = (cameraCursor.offsetWidth / 2) + img.offsetLeft
+		  var z = (cameraCursor.offsetHeight / 2) + img.offsetTop
+		  var x = e.clientX - o + 'px'
+		  var y = e.clientY - z + 'px'
+		  var cameraChild = cameraWrap.children[0].src;
+		  modalTarget.style.backgroundImage = "url(" + cameraChild + ")";
+		  modalTarget.style.backgroundPosition = '-' + x + ' ' + '-' + y
+
+		})
+
+		modalClose.addEventListener('click', function() {
+		  cameraCursor.style.opacity = '1'
+		  cameraCursor.style.cursor = "none"
+		})
+	</script>
+ </body>
+</html>

@@ -1,0 +1,94 @@
+<!doctype html>
+<html><!--页面最外部结构-->
+ <head><!--网页的头部-->
+	<!--charset="编码集" utf-8 国际编码   gbk  gbk2312 中文-->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="keywords" content="关键词的内容36个字范围内" />
+	<meta name="description" content="关键词描述 76字范围内" />
+	<title>锤子-现场直播-黑客帝国技术</title>
+	<!--CSS层叠样式表-->
+	<style>
+	    /*css rest*/
+        body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td{margin: 0;padding: 0;}
+		body{background:#000;}
+	</style>
+ </head>
+ <body><!--网页的主体-->
+	
+	<!--
+
+
+		动画？》？？？    怎么生成？？
+
+		属性？ 绿色的文字 
+
+		状态？  自由落体 运动
+	
+	-->
+		
+	<canvas id="can"></canvas> <!--画布--->
+
+	<!--javascript脚本文件-->
+    <script>
+		var canvas = document.getElementById("can");//获取画布ID名
+
+		var ctx = canvas.getContext("2d");//设置画布的绘图轨迹
+		//canvas.style.background = "red";设置画布颜色
+		
+		var w = canvas.width=window.innerWidth; //将获取的浏览器的宽度等于 canvas.width 
+
+		var h = canvas.height=window.innerHeight; //将获取的浏览器的高度等于 canvas.height 
+		
+		/*ctx.beginPath();//开始画
+		//画圆 方法 
+		ctx.arc(250,250,100,0,360,false);
+		ctx.fill();//填充
+		ctx.colosePath();//结束画
+		*/
+		//ctx.fillText("锤子直播黑客帝国文字雨技术",250,250);
+		//文字掉落算法 ？？？算？？？？
+		/*
+			求  一行能够装都多个文字
+
+			已知 宽度  文字宽度
+		
+		*/
+		var text = "锤子直播黑客帝国文字雨技术";
+		text = text.split("");
+		var fontsize = 20; //已知文字大小
+		
+		var wf = w/fontsize;
+		/*
+			alert("宽度"+w)	
+			alert("可以装多少文字"+wf)	
+		*/
+		//开始的时候给所有文字y坐标等于 1
+		var arr = [];//为了存储我们的值
+		for (var i=0;i<wf ;i++ )
+		{
+			arr[i] = 1;
+		}
+		//console.log(arr)
+		//funtion函数 方法  draw？ 方法名
+		draw()
+		function draw(){
+			ctx.fillStyle = "rgba(0,0,0,.05)";
+			ctx.fillRect(0,0,w,h);
+			ctx.fillStyle = "#0f0";
+			for (var i=0;i<arr.length ;i++ )
+			{
+				var txt = text[Math.floor(Math.random()*text.length)];
+				ctx.fillText(txt,i*fontsize,arr[i]*fontsize);
+				ctx.fill();
+				arr[i]++;
+				if (arr[i]*fontsize>h && Math.random()>0.95)
+				{
+					arr[i] = 0;
+				}
+			}
+			
+		}
+		setInterval(draw,33);
+	</script>
+ </body>
+</html>
