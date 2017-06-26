@@ -1,0 +1,96 @@
+<!DOCTYPE html> <!--网页-->
+<html> 
+	<head><!--网页头部-->
+		<meta charset="utf-8" />
+		<title>canvas绘制星星-锤子</title>
+		<!--样式-->
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			body{background: #000;}
+			#can{
+				
+			}
+		</style>
+	</head>
+	<body><!--网页身体 装载内容-->
+		<!--创建一个画布
+			canvas 网页中矢量图
+			
+			A 画布是在样式里面设置？ X
+			
+			B 画布是在标签属性设置？	对	
+			
+			画布怎么个使用法？
+			canvas 结合 javascript行为脚本去开发
+		-->
+		<canvas id="can" width="500" height="500"></canvas>
+		<!--脚本-->
+		<script type="text/javascript">
+//			脚本代码内容
+			var can = document.getElementById("can");
+			var ctx = can.getContext("2d");//绘制图形轨迹环境
+			can.width = window.innerWidth;
+			can.height = window.innerHeight;
+//			ctx.beginPath();//开始绘制
+//			ctx.fillStyle = "yellow"; //设置绘制颜色
+//			ctx.fillRect(0,0,500,500);
+//			ctx.closePath();
+			//绘制线条
+//			ctx.moveTo(320,320);
+//			ctx.lineTo(320,0)
+//			ctx.stroke();//x线条方式去绘制
+//			ctx.beginPath();
+//			for (var i=0;i<5;i++) {
+//				// x =Math.cos(2*Math.PI/360)*R ;y = Math.sin(2*Math.PI/360)*R)
+//				ctx.lineTo(Math.cos( (18+i*72)/180*Math.PI )*200+250,-Math.sin( (18+i*72)/180*Math.PI )*200+250);
+//				ctx.lineTo(Math.cos( (54+i*72)/180*Math.PI )*120+250,-Math.sin( (54+i*72)/180*Math.PI )*120+250);			
+//			}
+//			ctx.fillStyle = "yellow";
+//			ctx.fill();
+//			ctx.closePath();
+//			
+//			ctx.beginPath();
+//			for (var i=0;i<5;i++) {
+//				// x =Math.cos(2*Math.PI/360)*R ;y = Math.sin(2*Math.PI/360)*R)
+//				ctx.lineTo(Math.cos( (18+i*72)/180*Math.PI )*150+250,-Math.sin( (18+i*72)/180*Math.PI )*150+250);
+//				ctx.lineTo(Math.cos( (54+i*72)/180*Math.PI )*50+250,-Math.sin( (54+i*72)/180*Math.PI )*50+250);			
+//			}
+//			ctx.fillStyle = "red";
+//			ctx.fill();
+//			ctx.closePath();
+			function drawStar(cxt,x,y,r,R,rot){
+				ctx.save();
+				cxt.beginPath();
+				for (var i=0;i<5;i++) {
+					ctx.lineTo(Math.cos( (18+i*72)/180*Math.PI )*R+x,-Math.sin( (18+i*72)/180*Math.PI )*R+y);
+					ctx.lineTo(Math.cos( (54+i*72)/180*Math.PI )*r+x,-Math.sin( (54+i*72)/180*Math.PI )*r+y);
+				}
+				cxt.fillStyle = "yellow";
+				cxt.fill();
+				cxt.restore();
+			}
+			var arr = [];
+			var num = 100;
+			for(var i=0;i<num;i++){			
+				arr.push({					
+					Sx:Math.random()*window.innerWidth,
+					Sy:Math.random()*window.innerHeight,
+					Sr:Math.random()*10+2,
+					SR:Math.random()*20+4,
+				})
+			}	
+			init();
+			var rot = 100;
+			function init(){			
+				for(var i=0;i<arr.length;i++){
+					var p = arr[i];
+					
+					drawStar(ctx,p.Sx,p.Sy,p.Sr,p.SR,rot);
+					p.Sy++;
+				}
+				requestAnimationFrame(init)
+			}
+//			drawStar(ctx,250,250,100,150,30);
+		</script>
+	</body>
+</html>
